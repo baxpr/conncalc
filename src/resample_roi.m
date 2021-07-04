@@ -1,4 +1,4 @@
-function [rwroi_nii,roi_csv] = resample_roi(wroi_nii,wmeanfmri_nii,roi_csv,out_dir)
+function [rwroi_nii,rroi_csv] = resample_roi(roi_nii,wmeanfmri_nii,roi_csv,out_dir)
 
 %% Resample ROI image
 
@@ -7,10 +7,10 @@ flags = struct('mask',true,'mean',false,'interp',0,'which',1, ...
 	'wrap',[0 0 0],'prefix','r');
 
 % Use SPM to reslice
-spm_reslice_quiet({wmeanfmri_nii wroi_nii},flags);
+spm_reslice_quiet({wmeanfmri_nii roi_nii},flags);
 
 % Figure out the new filename
-[p,n,e] = fileparts(wroi_nii);
+[p,n,e] = fileparts(roi_nii);
 rwroi_nii = fullfile(p,['r' n e]);
 
 
@@ -41,7 +41,7 @@ end
 % Drop any extra columns and save to file
 roi_info = roi_info(:,{'Label','Region'});
 [~,n,e] = fileparts(roi_csv);
-roi_csv = fullfile(out_dir,[n e]);
-writetable(roi_info,roi_csv)
+rroi_csv = fullfile(out_dir,[n e]);
+writetable(roi_info,rroi_csv)
 
 

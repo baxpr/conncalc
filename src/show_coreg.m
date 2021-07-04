@@ -1,5 +1,4 @@
-function show_coreg(out_dir,wmeanfmri_nii,wt1_nii, ...
-	project,subject,session,scan)
+function show_coreg(out_dir,meanfmri_nii,t1_nii,label_info)
 
 % Reslice flags and target image
 flags = struct('mask',true,'mean',false,'interp',1,'which',1, ...
@@ -8,14 +7,14 @@ tgt_nii = [spm('dir') '/tpm/TPM.nii,1'];
 Ytgt = spm_read_vols(spm_vol(tgt_nii));
 
 % Reslice and load mean fmri
-spm_reslice_quiet({tgt_nii,wmeanfmri_nii},flags);
-[p,n,e] = fileparts(wmeanfmri_nii);
+spm_reslice_quiet({tgt_nii,meanfmri_nii},flags);
+[p,n,e] = fileparts(meanfmri_nii);
 rfmri_nii = fullfile(p,['r' n e]);
 Yfmri = spm_read_vols(spm_vol(rfmri_nii));
 
 % Reslice and load T1
-spm_reslice_quiet({tgt_nii,wt1_nii},flags);
-[p,n,e] = fileparts(wt1_nii);
+spm_reslice_quiet({tgt_nii,t1_nii},flags);
+[p,n,e] = fileparts(t1_nii);
 rt1_nii = fullfile(p,['r' n e]);
 Yt1 = spm_read_vols(spm_vol(rt1_nii));
 
@@ -44,12 +43,10 @@ figH = guihandles(pdf_figure);
 set(pdf_figure,'Colormap',colormap(gray));
 
 % Summary
-set(figH.summary_text, 'String', 'MNI space registration check' )
+set(figH.summary_text, 'String', 'Registration check' )
 
 % Scan info
-set(figH.scan_info, 'String', sprintf( ...
-	'%s, %s, %s, %s', ...
-	project, subject, session, scan));
+set(figH.scan_info, 'String', sprintf('%s',label_info));
 set(figH.date,'String',['Report date: ' date]);
 set(figH.version,'String',['Matlab version: ' version]);
 

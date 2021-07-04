@@ -8,8 +8,8 @@
 # Set up FSL (we only use fslstats so no need for the full setup)
 export FSLOUTPUTTYPE=NIFTI_GZ
 
-# MNI space connectivity maps
-ss_conn_mni.sh
+# Connectivity maps
+ss_conn.sh
 
 # Make PDF pages
 ss_combine.sh
