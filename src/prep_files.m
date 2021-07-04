@@ -3,7 +3,7 @@ function outfnames = prep_files(inp)
 outfnames = struct();
 
 % Copy files to out_dir and unzip
-for tag = {'removegm','keepgm','meanfmri','t1'}
+for tag = {'removegm','keepgm','meanfmri','t1','mask'}
 	varname = [tag{1} '_niigz'];
 	inputfile = inp.(varname);
 	outputfile = fullfile(inp.out_dir,[tag{1} '.nii.gz']);
@@ -16,7 +16,7 @@ end
 % And we'll grab the ROI file separately so we can handle the in/out of
 % container logic
 
-if isempty(fileparts(inp.wroi_niigz))
+if isempty(fileparts(inp.roi_niigz))
 	% Use an ROI file from container if no path provided
 	roi_niigz = fullfile(inp.out_dir,'roi.nii.gz');
 	copyfile(which(inp.roi_niigz),roi_niigz);

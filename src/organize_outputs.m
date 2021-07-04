@@ -38,3 +38,6 @@ system(['cd ' out_dir ' && mkdir ROILABELS && ' ...
 	' cp ' rroi_csv ' ROILABELS']);
 
 
+% Computed brain mask
+system(['cd ' out_dir ' && mkdir MASK && ' ...
+	' cp mask.nii MASK && gzip MASK/*.nii']);

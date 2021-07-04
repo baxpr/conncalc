@@ -16,12 +16,15 @@ addOptional(P,'roi_niigz','ABHHIP_LR.nii.gz')
 addOptional(P,'roilabel_csv','')
 
 % Preprocessed fMRI, outputs from connprep. Same space as the ROI image.
-addOptional(P,'removegm_niigz','../INPUTS/filtered_removegm_noscrub_wadfmri.nii.gz');
-addOptional(P,'keepgm_niigz','../INPUTS/filtered_keepgm_noscrub_wadfmri.nii.gz');
-addOptional(P,'meanfmri_niigz','../INPUTS/wmeanadfmri.nii.gz');
+addOptional(P,'removegm_niigz','');
+addOptional(P,'keepgm_niigz','');
+addOptional(P,'meanfmri_niigz','');
 
 % T1, e.g. bias corrected T1 from cat12
-addOptional(P,'t1_niigz','../INPUTS/wmt1.nii.gz');
+addOptional(P,'t1_niigz','');
+
+% Brain mask to avoid storing an entire volume of junk
+addOptional(P,'mask_niigz','');
 
 % Smoothing to apply to connectivity maps
 %addOptional(P,'fwhm','6');
