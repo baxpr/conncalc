@@ -1,0 +1,9 @@
+*~
+local*
+INPUTS*
+OUTPUTS*
+error.log
+freesurfer_license.txt
+*.simg
+.Rhistory
+*.asv
