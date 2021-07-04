@@ -16,6 +16,6 @@ Computes functional connectivity maps and matrices for a specified set of ROIs.
 
 - Resample the ROI image to match the fMRI. It's assumed both are already aligned and in the same space as the ROI image.
 - Extract mean time series from the supplied fMRI for each ROI in the ROI image.
-- Compute functional connectivity: `R`, the correlation coefficient; and `Z`, the Fisher transformed correlation, `atanh(R) * sqrt(N-3)` where `N` is number of time points. Also `Vdf`, `Pdf`, `Zdf` autocorrelation-adjusted connectivity metrics from https://github.com/asoroosh/xDF. The ROI-to_ROI matrix is computed, and also voxelwise connectivity maps.
+- Compute functional connectivity: `R`, the correlation coefficient; and `Z`, the Fisher transformed correlation, `atanh(R) * sqrt(N-3)` where `N` is number of time points. Also `Vdf`, `Pdf`, `Zdf` autocorrelation-adjusted connectivity metrics from https://github.com/asoroosh/xDF. The ROI-to_ROI matrix is computed, and also voxelwise connectivity maps if requested.
 - Generate a PDF report and organize outputs for XNAT.
 
