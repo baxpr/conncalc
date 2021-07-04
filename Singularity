@@ -79,7 +79,7 @@ From: ubuntu:20.04
   
   # Matlab. We don't need to set the Matlab library path here, because Matlab's
   # auto-generated run_??.sh script does it for us.
-  export MATLAB_SHELL=/bin/bash
+  export MATLAB_SHELL=/usr/bin/bash
   export MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/v97
   
   # Freesurfer
