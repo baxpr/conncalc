@@ -5,7 +5,6 @@ From: ubuntu:20.04
   Compute fMRI connectivity matrices and maps for MNI space ROIs.
   Info and usage:
     /opt/mniconn/README.md
-    /opt/mniconn/build/test_sing_container.sh
 
 
 %setup
@@ -30,10 +29,6 @@ From: ubuntu:20.04
   apt-get install -y libopenblas-base language-pack-en                # FSL
   apt-get install -y libglu1-mesa                                     # Freeview
   
-  # Fix imagemagick policy to allow PDF output. See https://usn.ubuntu.com/3785-1/
-  sed -i 's/rights="none" pattern="PDF"/rights="read | write" pattern="PDF"/' \
-    /etc/ImageMagick-6/policy.xml
-  
   # Download the Matlab Compiled Runtime installer, install, clean up
   mkdir /MCR
   wget -nv -P /MCR https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019b_Update_6_glnxa64.zip
@@ -41,6 +36,9 @@ From: ubuntu:20.04
   /MCR/MATLAB_Runtime_R2019b_Update_6_glnxa64/install -mode silent -agreeToLicense yes
   rm -r /MCR/MATLAB_Runtime_R2019b_Update_6_glnxa64 /MCR/MATLAB_Runtime_R2019b_Update_6_glnxa64.zip
   rmdir /MCR
+
+  # We need a "dry run" of SPM executable to extract the CTF archive.
+  /opt/mniconn/bin/run_spm12.sh /usr/local/MATLAB/MATLAB_Runtime/v97 quit
 
   # Install Freesurfer. We just need freeview
   wget -nv -P /usr/local https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/dev/freesurfer-linux-centos7_x86_64-dev.tar.gz
@@ -71,38 +69,34 @@ From: ubuntu:20.04
   rm -r fsl fsl-6.0.4-centos7_64.tar.gz
 
   # Create input/output directories for binding
-  mkdir /INPUTS && mkdir /OUTPUTS
+  mkdir /INPUTS && mkdir /OUTPUTS && mkdir /wkdir
 
-  # Singularity-hub doesn't work with github LFS (it gets the pointer info instead 
-  # of the actual file) so we get the compiled matlab executable via direct download.
-  # Not needed for local build.
-  rm /opt/mniconn/bin/spm12.ctf
-  wget -nv -P /opt/mniconn/bin https://github.com/baxpr/mniconn/raw/master/bin/spm12.ctf
-
-  # Also need a "dry run" of SPM executable to avoid directory creation errors later.
-  /opt/mniconn/bin/run_spm12.sh /usr/local/MATLAB/MATLAB_Runtime/v97 quit
-
-
-%environment
-  # We don't need to set the Matlab library path here, because Matlab's
-  # auto-generated run_??.sh script does it for us.
+  # Clean up unneeded packages and cache
+  apt clean && apt -y autoremove
   
-  # Matlab shell
-  MATLAB_SHELL=/bin/bash
+  
+%environment
+  
+  # Matlab. We don't need to set the Matlab library path here, because Matlab's
+  # auto-generated run_??.sh script does it for us.
+  export MATLAB_SHELL=/bin/bash
+  export MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/v97
   
   # Freesurfer
   export FREESURFER_HOME=/usr/local/freesurfer
 
   # FSL (we only use fslstats so no need for the full setup)
+  export FSLDIR=/usr/local/fsl
   export FSLOUTPUTTYPE=NIFTI_GZ
   
   # Path
-  export PATH=/opt/mniconn/src:/usr/local/fsl/bin:${PATH}
+  export PATH=/opt/mniconn/src:${FSLDIR}/bin:${PATH}
 
 
 %runscript
+
   xvfb-run --server-num=$(($$ + 99)) \
   --server-args='-screen 0 1600x1200x24 -ac +extension GLX' \
-  bash /opt/mniconn/bin/run_spm12.sh \
-  /usr/local/MATLAB/MATLAB_Runtime/v97 function mniconn "$@"
+  /opt/mniconn/bin/run_spm12.sh /usr/local/MATLAB/MATLAB_Runtime/v97 \
+  function mniconn "$@"
 
