@@ -5,8 +5,8 @@
 # Set up freesurfer
 . $FREESURFER_HOME/SetUpFreeSurfer.sh
 
-# Set up FSL (we only use fslstats so no need for the full setup)
-export FSLOUTPUTTYPE=NIFTI_GZ
+# ROIs
+ss_roi.sh
 
 # Connectivity maps
 ss_conn.sh
