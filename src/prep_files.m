@@ -4,14 +4,13 @@ outfnames = struct();
 
 % Copy files to out_dir and unzip. mask is optional
 for tag = {'removegm','keepgm','meanfmri','t1','mask'}
-	varname = [tag{1} '_niigz'];
-	inputfile = inp.(varname);
+	inputfile = inp.([tag{1} '_niigz']);
 	if strcmp(tag,'mask') && isempty(inputfile), continue, end
 	outputfile = fullfile(inp.out_dir,[tag{1} '.nii.gz']);
 	copyfile(inputfile,outputfile);
 	system(['gunzip -f ' outputfile]);
 	outputfile = strrep(outputfile,'.nii.gz','.nii');
-	outfnames.(varname) = outputfile;
+	outfnames.([tag{1} '_nii']) = outputfile;
 end
 
 % And we'll grab the ROI file separately so we can handle the in/out of

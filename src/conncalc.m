@@ -35,14 +35,8 @@ addOptional(P,'connmaps_out','yes')
 % Subject info if on XNAT
 addOptional(P,'label_info','UNKNOWN SCAN');
 
-% Change paths to match test environment if needed
-addOptional(P,'magick_path','/usr/bin');
-addOptional(P,'src_path','/opt/conncalc/src');
-addOptional(P,'fsl_path','/usr/local/fsl/bin');
-addOptional(P,'fs_path','/usr/local/freesurfer');
-
 % Where to store outputs
-addOptional(P,'out_dir','../OUTPUTS');
+addOptional(P,'out_dir','/OUTPUTS');
 
 % Parse
 parse(P,varargin{:});
