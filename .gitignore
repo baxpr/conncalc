@@ -7,3 +7,6 @@ freesurfer_license.txt
 *.simg
 .Rhistory
 *.asv
+fsl*.tar.gz
+freesurfer*.tar.gz
+MATLAB*.zip
