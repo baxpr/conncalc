@@ -53,7 +53,7 @@ From: ubuntu:20.04
   tar -zxf /opt/${fsfile} -C /usr/local freesurfer/SetUpFreeSurfer.sh
   tar -zxf /opt/${fsfile} -C /usr/local freesurfer/FreeSurferEnv.sh
   tar -zxf /opt/${fsfile} -C /usr/local freesurfer/lib/qt
-  tar -zxf /opt/${fsfile} -C /usr/local freesurfer/lib/vtk/*
+  tar -zxf /opt/${fsfile} -C /usr/local freesurfer/lib/vtk
   rm /opt/${fsfile}
   
   # Freeview needs a machine id here
