@@ -28,12 +28,11 @@ if strcmp(inp.connmaps_out,'yes') && ~isempty(mask_nii)
 	mask_maps(inp.out_dir,F.mask_nii);
 end
 
-% Generate PDF report
+% Generate PDF report pages
 disp('Make PDF pages  -------------------------------------------------------------------')
 make_pdf_pages(inp.out_dir,F.meanfmri_nii,F.t1_nii,rroi_nii,rroi_csv, ...
 	inp.connmaps_out,inp.label_info);
 
-% Organize and clean up
-disp('Organize outputs   ----------------------------------------------------------------')
-organize_outputs(inp.out_dir,rroi_nii,rroi_csv,inp.connmaps_out);
+% Done with the matlab part
+if isdeployed, exit, end
 
