@@ -18,9 +18,9 @@ From: ubuntu:20.04
   README.md                    /opt/conncalc
   
   # If we have a local copy of these packages, we can use them instead of downloading
-  fsl-6.0.4-centos7_64.tar.gz                    /opt
-  freesurfer-linux-centos7_x86_64-7.1.1.tar.gz   /opt
-  MATLAB_Runtime_R2019b_Update_6_glnxa64.zip     /opt
+  external/fsl-6.0.4-centos7_64.tar.gz                    /opt
+  external/freesurfer-linux-centos7_x86_64-7.1.1.tar.gz   /opt
+  external/MATLAB_Runtime_R2019b_Update_6_glnxa64.zip     /opt
  
 %labels
   Maintainer baxter.rogers@vanderbilt.edu
