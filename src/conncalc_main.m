@@ -28,8 +28,7 @@ end
 % Generate PDF report
 disp('Make PDF   ------------------------------------------------------------------------')
 make_pdf(inp.out_dir,F.meanfmri_nii,F.t1_nii,rroi_nii,rroi_csv, ...
-	inp.magick_path,inp.src_path,inp.fsl_path,inp.fs_path,inp.connmaps_out, ...
-	inp.label_info);
+	inp.connmaps_out,inp.label_info);
 
 % Organize and clean up
 disp('Organize outputs   ----------------------------------------------------------------')
