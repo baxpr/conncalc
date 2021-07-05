@@ -2,9 +2,6 @@
 
 echo Screenshots maps
 
-# Set up freesurfer
-. $FREESURFER_HOME/SetUpFreeSurfer.sh
-
 function connmap {
 	# 1 IMG
 	# 2 name

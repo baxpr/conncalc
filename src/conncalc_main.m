@@ -29,8 +29,8 @@ if strcmp(inp.connmaps_out,'yes') && ~isempty(mask_nii)
 end
 
 % Generate PDF report
-disp('Make PDF   ------------------------------------------------------------------------')
-make_pdf(inp.out_dir,F.meanfmri_nii,F.t1_nii,rroi_nii,rroi_csv, ...
+disp('Make PDF pages  -------------------------------------------------------------------')
+make_pdf_pages(inp.out_dir,F.meanfmri_nii,F.t1_nii,rroi_nii,rroi_csv, ...
 	inp.connmaps_out,inp.label_info);
 
 % Organize and clean up

@@ -4,9 +4,6 @@
 
 echo Screenshots ROI
 
-# Set up freesurfer
-. $FREESURFER_HOME/SetUpFreeSurfer.sh
-
 thedate=$(date)
 
 # Work in output directory
