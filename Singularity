@@ -19,7 +19,6 @@ From: ubuntu:20.04
   ImageMagick-policy.xml       /opt
   
   # If we have a local copy of these packages, we can use them instead of downloading
-  external/fsl-6.0.4-centos7_64.tar.gz                    /opt
   external/freesurfer-linux-centos7_x86_64-7.1.1.tar.gz   /opt
   external/MATLAB_Runtime_R2019b_Update_6_glnxa64.zip     /opt
  
@@ -64,14 +63,6 @@ From: ubuntu:20.04
   # Freeview needs a machine id here
   dbus-uuidgen > /etc/machine-id
 
-  # We need a piece of FSL (fslstats, fslmaths)
-  fslfile=fsl-6.0.4-centos7_64.tar.gz
-  #wget -nv -P /opt https://fsl.fmrib.ox.ac.uk/fsldownloads/${fslfile}
-  mkdir -p /usr/local/fsl/bin
-  tar -zxf /opt/${fslfile} -C /usr/local fsl/bin/fslstats
-  tar -zxf /opt/${fslfile} -C /usr/local fsl/bin/fslmaths
-  rm /opt/${fslfile}
-
   # Create input/output directories for binding
   mkdir /INPUTS && mkdir /OUTPUTS && mkdir /wkdir
 
@@ -88,10 +79,6 @@ From: ubuntu:20.04
   
   # Freesurfer
   export FREESURFER_HOME=/usr/local/freesurfer
-
-  # FSL (we only use fslstats so no need for the full setup)
-  export FSLDIR=/usr/local/fsl
-  export FSLOUTPUTTYPE=NIFTI_GZ
   
   # Path
   export PATH=/opt/conncalc/src:${FSLDIR}/bin:${PATH}
