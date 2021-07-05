@@ -2,13 +2,15 @@
 
 # ROIs on t1 and mean fmri, axial slices +x / -y mm from center of mass of mean fmri
 
+echo Screenshots ROI
+
 thedate=$(date)
 
 # Work in output directory
 cd ${out_dir}
 
 # Find center of mass of mean fmri
-com=$(fslstats wmeanfmri -c)
+com=$(fslstats meanfmri -c)
 XYZ=(${com// / })
 
 # Axial slices to show, relative to COM in mm

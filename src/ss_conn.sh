@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo Screenshots conn
+
+# Set up freesurfer
+. $FREESURFER_HOME/SetUpFreeSurfer.sh
+
 function connmap {
 	# 1 IMG
 	# 2 name
@@ -55,3 +60,12 @@ montage -mode concatenate \
 	conn_*.png \
 	-tile 1x4 -quality 100 -background black -gravity center \
 	-border 10 -bordercolor white shot_conn.png
+
+# Annotate
+convert -density 300 -gravity Center shot_conn*.png \
+  -background white -resize 1850x -extent 2050x2800 -bordercolor white -border 100 \
+  -gravity SouthEast -background white -splice 0x15 -pointsize 9 \
+  -annotate +25+25 "$(date)" \
+  -gravity NorthWest -pointsize 12 -annotate +50+50 \
+  "${label_info}" \
+  page_conn.png
