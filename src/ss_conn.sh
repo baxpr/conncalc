@@ -46,9 +46,9 @@ while IFS= read -r csvline; do
 	roinum=$(echo "${csvline}" | cut -f 1 -d ,)
 	if [[ "${roinum}" == "Label" ]] ; then continue ; fi
 	roiname=$(echo "${csvline}" | cut -f 2 -d ,)
-    run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass ${roi_nii} ${roinum} loc.txt
+    run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass ${roi_nii} ${roinum} ${out_dir}/loc.txt
 	location=$(cat loc.txt)
-    rm loc.txt
+    #rm loc.txt
 	echo Seed image ${r} ${roiname} ${roinum} ${location}
 	connmap "connmaps/Z_${roiname}_removegm.nii" "${roiname}" ${location}
 done < "${rroi_csv}"

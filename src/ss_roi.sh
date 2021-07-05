@@ -10,9 +10,9 @@ thedate=$(date)
 cd ${out_dir}
 
 # Find center of mass of mean fmri
-run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass meanfmri.nii 0 com.txt
+run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass meanfmri.nii 0 ${out_dir}/com.txt
 com=$(cat com.txt)
-rm com.txt
+#rm com.txt
 XYZ=(${com// / })
 
 # Axial slices to show, relative to COM in mm
