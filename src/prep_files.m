@@ -31,6 +31,6 @@ else
 	copyfile(inp.roi_niigz,roi_niigz);
 	system(['gunzip -f ' roi_niigz]);
 	outfnames.roi_nii = strrep(roi_niigz,'.nii.gz','.nii');
-	outfnames.roi_csv = fullfile(inp.out_dir,'roi-labels.vsv');
+	outfnames.roi_csv = fullfile(inp.out_dir,'roi-labels.csv');
 	copyfile(inp.roilabel_csv,outfnames.roi_csv);
 end
