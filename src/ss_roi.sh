@@ -38,12 +38,12 @@ montage -mode concatenate slice_fmri_-0{4,3,2,1}*.png slice_fmri_0*.png \
     -border 20 -bordercolor black page_fmri.png
 
 convert \
-    -size 2600x3365 xc:white \
-    -gravity center \( page_fmri.png -resize 2400x \) -composite \
-    -gravity North -pointsize 48 -annotate +0+100 \
+    -size 2250x3000 xc:white -density 300 \
+    -gravity center \( page_fmri.png -resize 2000x \) -composite \
+    -gravity North -pointsize 12 -annotate +0+100 \
     "ROIs on mean fMRI" \
-    -gravity SouthEast -pointsize 48 -annotate +100+100 "${thedate}" \
-    -gravity NorthWest -pointsize 48 -annotate +100+200 "${label_info}" \
+    -gravity SouthEast -pointsize 12 -annotate +100+100 "${thedate}" \
+    -gravity NorthWest -pointsize 12 -annotate +100+200 "${label_info}" \
     page_fmri.png
 
 montage -mode concatenate slice_t1_-0{4,3,2,1}*.png slice_t1_0*.png \
@@ -51,11 +51,11 @@ montage -mode concatenate slice_t1_-0{4,3,2,1}*.png slice_t1_0*.png \
     -border 20 -bordercolor black page_t1.png
 
 convert \
-    -size 2600x3365 xc:white \
-    -gravity center \( page_t1.png -resize 2400x \) -composite \
-    -gravity North -pointsize 48 -annotate +0+100 \
+    -size 2250x3000 xc:white -density 300 \
+    -gravity center \( page_t1.png -resize 2000x \) -composite \
+    -gravity North -pointsize 12 -annotate +0+100 \
     "ROIs on T1" \
-    -gravity SouthEast -pointsize 48 -annotate +100+100 "${thedate}" \
-    -gravity NorthWest -pointsize 48 -annotate +100+200 "${label_info}" \
+    -gravity SouthEast -pointsize 12 -annotate +100+100 "${thedate}" \
+    -gravity NorthWest -pointsize 12 -annotate +100+200 "${label_info}" \
     page_t1.png
 
