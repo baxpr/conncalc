@@ -4,13 +4,16 @@
 
 echo Screenshots ROI
 
+# Set up freesurfer
+. $FREESURFER_HOME/SetUpFreeSurfer.sh
+
 thedate=$(date)
 
 # Work in output directory
 cd ${out_dir}
 
 # Find center of mass of mean fmri
-com=$(fslstats meanfmri -c)
+com=$(run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass meanfmri.nii 0)
 XYZ=(${com// / })
 
 # Axial slices to show, relative to COM in mm
@@ -18,17 +21,19 @@ for sl in -040 -030 -020 -010 000 010 020 030 040 050 060; do
 
     Z=$(echo "${XYZ[2]} + ${sl}" | bc -l)
 
-    fsleyes render -of slice_fmri_${sl}.png \
-        --scene ortho --worldLoc ${XYZ[0]} ${XYZ[1]} ${Z} \
-        --layout horizontal --hideCursor --hideLabels --hidex --hidey \
-        meanfmri --overlayType volume \
-        roi --overlayType label --lut random_big --outline --outlineWidth 2
-
-    fsleyes render -of slice_t1_${sl}.png \
-        --scene ortho --worldLoc ${XYZ[0]} ${XYZ[1]} ${Z} \
-        --layout horizontal --hideCursor --hideLabels --hidex --hidey \
-        t1 --overlayType volume \
-        roi --overlayType label --lut random_big --outline --outlineWidth 2
+	freeview \
+	  -v meanfmri.nii \
+	  -v roi.nii:colormap=lut:outline=yes \
+	  -viewsize 800 800 --layout 1 --zoom 1.2 --viewport axial \
+	  -ras ${XYZ[0]} ${XYZ[1]} ${Z} \
+	  -ss slice_fmri_${sl}.png
+    
+	freeview \
+	  -v t1.nii \
+	  -v roi.nii:colormap=lut:outline=yes \
+	  -viewsize 800 800 --layout 1 --zoom 1.2 --viewport axial \
+	  -ras ${XYZ[0]} ${XYZ[1]} ${Z} \
+	  -ss slice_t1_${sl}.png
 
 done
 

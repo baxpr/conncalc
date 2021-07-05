@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo Screenshots conn
+echo Screenshots maps
 
 # Set up freesurfer
 . $FREESURFER_HOME/SetUpFreeSurfer.sh
@@ -43,15 +43,14 @@ function connmap {
 
 cd ${out_dir}
 
-# Make images for each seed ROI
+# Make images for each seed ROI. Bit of a hacky way to loop through lines of the
+# ROI label file, but it works
 while IFS= read -r csvline; do
 	roinum=$(echo "${csvline}" | cut -f 1 -d ,)
 	if [[ "${roinum}" == "Label" ]] ; then continue ; fi
 	roiname=$(echo "${csvline}" | cut -f 2 -d ,)
-	minv=$(echo "${roinum} - 0.5" | bc -l)
-	maxv=$(echo "${roinum} + 0.5" | bc -l)
-	location=$(fslstats "${roi_nii}" -l $minv -u $maxv -c)
-	echo Seed image ${r} ${roiname} ${minv} ${maxv} ${location}
+	location=$(run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass ${roi_nii} ${roinum})
+	echo Seed image ${r} ${roiname} ${roinum} ${location}
 	connmap "connmaps/Z_${roiname}_removegm.nii" "${roiname}" ${location}
 done < "${rroi_csv}"
 
