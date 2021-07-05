@@ -2,10 +2,11 @@ function outfnames = prep_files(inp)
 
 outfnames = struct();
 
-% Copy files to out_dir and unzip
+% Copy files to out_dir and unzip. mask is optional
 for tag = {'removegm','keepgm','meanfmri','t1','mask'}
 	varname = [tag{1} '_niigz'];
 	inputfile = inp.(varname);
+	if strcmp(tag,'mask') && isempty(inputfile), continue, end
 	outputfile = fullfile(inp.out_dir,[tag{1} '.nii.gz']);
 	copyfile(inputfile,outputfile);
 	system(['gunzip -f ' outputfile]);

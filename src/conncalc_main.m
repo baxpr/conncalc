@@ -21,7 +21,7 @@ conncompute(roidata_removegm,F.removegm_nii,inp.out_dir,'removegm',inp.connmaps_
 conncompute(roidata_keepgm,F.keepgm_nii,inp.out_dir,'keepgm',inp.connmaps_out);
 
 % Mask files to a (lenient) brain mask to save space, if we made maps
-if strcmp(inp.connmaps_out,'yes')
+if strcmp(inp.connmaps_out,'yes') && ~isempty(mask_nii)
 	mask_maps(inp.out_dir,F.mask_nii);
 end
 

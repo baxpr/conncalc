@@ -10,7 +10,7 @@ Computes functional connectivity maps and matrices for a specified set of ROIs.
 
 - `t1_niigz`. T1 image for the PDF report.
 
-- `mask_niigz`. Brain mask - will be binarized and dilated and used to exclude any clearly ex-brain voxels in the stored connectivity maps.
+- `mask_niigz`. Brain mask - will be binarized and dilated and used to exclude any clearly ex-brain voxels in the stored connectivity maps. Optional - if not supplied, no masking will be done.
 
 ## Pipeline
 
