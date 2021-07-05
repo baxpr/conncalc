@@ -21,7 +21,7 @@ while [[ $# -gt 0 ]]; do
         --connmaps_out)    export connmaps_out="$2";   shift; shift ;;
         --label_info)      export label_info="$2";     shift; shift ;;
         --out_dir)         export out_dir="$2";        shift; shift ;;
-        *) echo "Input ${1} not recognized" shift ;;
+        *) echo "Input ${1} not recognized"; shift ;;
     esac
 done
 

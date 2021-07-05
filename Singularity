@@ -81,7 +81,7 @@ From: ubuntu:20.04
   export FREESURFER_HOME=/usr/local/freesurfer
   
   # Path
-  export PATH=/opt/conncalc/src:${FSLDIR}/bin:${PATH}
+  export PATH=/opt/conncalc/src:/opt/conncalc/bin:${PATH}
 
 
 %runscript
