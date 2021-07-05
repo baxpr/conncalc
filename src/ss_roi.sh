@@ -32,7 +32,7 @@ done
 
 # Combine into single page
 montage -mode concatenate slice_fmri_-0{4,3,2,1}*.png slice_fmri_0*.png \
-    -tile 4x3 -quality 100 -background black -gravity center \
+    -tile 3x4 -quality 100 -background black -gravity center \
     -border 20 -bordercolor black page_fmri.png
 
 convert \
@@ -45,7 +45,7 @@ convert \
     page_fmri.png
 
 montage -mode concatenate slice_t1_-0{4,3,2,1}*.png slice_t1_0*.png \
-    -tile 4x3 -quality 100 -background black -gravity center \
+    -tile 3x4 -quality 100 -background black -gravity center \
     -border 20 -bordercolor black page_t1.png
 
 convert \
