@@ -16,6 +16,7 @@ From: ubuntu:20.04
   src                          /opt/conncalc
   build                        /opt/conncalc
   README.md                    /opt/conncalc
+  ImageMagick-policy.xml       /opt
   
   # If we have a local copy of these packages, we can use them instead of downloading
   external/fsl-6.0.4-centos7_64.tar.gz                    /opt
@@ -33,6 +34,10 @@ From: ubuntu:20.04
   apt-get install -y libopenblas-base language-pack-en                # FSL
   apt-get install -y libglu1-mesa                                     # Freeview
   
+  # We need to make the ImageMagick security policy more permissive
+  # https://www.kb.cert.org/vuls/id/332928
+  mv /opt/ImageMagick-policy.xml /etc/ImageMagick-6/policy.xml
+
   # Download the Matlab Compiled Runtime installer, install, clean up
   matpfx=MATLAB_Runtime_R2019b_Update_6_glnxa64
   #wget -nv -P /opt https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/deployment_files/installer/complete/glnxa64/${matpfx}.zip
