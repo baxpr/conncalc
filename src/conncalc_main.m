@@ -1,5 +1,8 @@
 function conncalc_main(inp)
 
+% We know
+warning('off','MATLAB:table:ModifiedAndSavedVarnames');
+
 % Unzip images and copy to working location
 disp('File prep   -----------------------------------------------------------------------')
 F = prep_files(inp);
