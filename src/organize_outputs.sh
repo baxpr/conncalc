@@ -6,6 +6,7 @@ mkdir PDF
 mv conncalc.pdf PDF
 
 if [[ "${connmaps_out}" == "yes" ]] ; then
+
     mkdir ZMAPS_KEEPGM
     mv connmaps/Z_*_keepgm.nii
     gzip ZMAPS_KEEPGM/*.nii
@@ -14,7 +15,7 @@ if [[ "${connmaps_out}" == "yes" ]] ; then
     mv connmaps/Z_*_removegm.nii
     gzip ZMAPS_REMOVEGM/*.nii
 
-end
+fi
 
 mkdir RMATRIX
 mv R_*.csv RMATRIX
