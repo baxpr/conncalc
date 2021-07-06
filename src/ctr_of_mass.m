@@ -1,5 +1,7 @@
 function ctr_of_mass(img_nii,roival,outfile)
 
+if ischar(roival), roival=str2double(roival); end
+
 V = spm_vol(img_nii);
 [Y,XYZ] = spm_read_vols(V(1));
 Y(isnan(Y(:))) = 0;
