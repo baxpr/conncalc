@@ -46,10 +46,12 @@ run_spm12.sh ${MATLAB_RUNTIME} function conncalc \
 ss_roi.sh
 
 if [[ ${connmaps_out} == "yes" ]]; then
+    cd "${out_dir}"
     ss_conn.sh
     convert connmatrix.png page_fmri.png page_t1.png coreg.png page_conn*.png \
         conncalc.pdf
 else
+    cd "${out_dir}"
     convert connmatrix.png page_fmri.png page_t1.png coreg.png \
         conncalc.pdf
 fi
