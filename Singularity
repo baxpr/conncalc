@@ -30,7 +30,7 @@ From: ubuntu:20.04
   apt update
   apt install -y wget unzip zip xvfb ghostscript imagemagick bc   # Misc tools
   apt install -y openjdk-8-jre                                    # Matlab
-  apt install -y libglu1-mesa                                     # Freeview
+  apt install -y libglu1-mesa language-pack-en                    # Freeview
   
   # We need to make the ImageMagick security policy more permissive
   # https://www.kb.cert.org/vuls/id/332928

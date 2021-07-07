@@ -43,6 +43,7 @@ run_spm12.sh ${MATLAB_RUNTIME} function conncalc \
 
 # PDF creation and cleanup is done in bash
 . $FREESURFER_HOME/SetUpFreeSurfer.sh
+export XDG_RUNTIME_DIR=/tmp
 
 ss_roi.sh
 

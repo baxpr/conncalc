@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo Organize outputs
+
 cd "${out_dir}"
 
 mkdir PDF
