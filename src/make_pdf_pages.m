@@ -1,5 +1,4 @@
-function make_pdf_pages(out_dir,meanfmri_nii,t1_nii,rroi_nii,rroi_csv, ...
-	connmaps_out,label_info)
+function make_pdf_pages(out_dir,meanfmri_nii,t1_nii,label_info)
 
 
 %% Connectivity matrix

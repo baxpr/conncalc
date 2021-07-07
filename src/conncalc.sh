@@ -4,6 +4,7 @@
 
 # Initialize defaults for any input parameters where that seems useful
 export connmaps_out=no
+export mask_niigz=none
 export label_info="UNKNOWN SCAN"
 export out_dir=/OUTPUTS
 

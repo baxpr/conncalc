@@ -24,14 +24,13 @@ conncompute(roidata_removegm,F.removegm_nii,inp.out_dir,'removegm',inp.connmaps_
 conncompute(roidata_keepgm,F.keepgm_nii,inp.out_dir,'keepgm',inp.connmaps_out);
 
 % Mask files to a (lenient) brain mask to save space, if we made maps
-if strcmp(inp.connmaps_out,'yes') && ~isempty(mask_nii)
+if strcmp(inp.connmaps_out,'yes') && ~isempty(F.mask_nii)
 	mask_maps(inp.out_dir,F.mask_nii);
 end
 
 % Generate PDF report pages
 disp('Make PDF pages  -------------------------------------------------------------------')
-make_pdf_pages(inp.out_dir,F.meanfmri_nii,F.t1_nii,rroi_nii,rroi_csv, ...
-	inp.connmaps_out,inp.label_info);
+make_pdf_pages(inp.out_dir,F.meanfmri_nii,F.t1_nii,inp.label_info);
 
 % Done with the matlab part
 if isdeployed, exit, end
