@@ -1,4 +1,4 @@
-#!/urs/bin/env bash
+#!/usr/bin/env bash
 #
 # Main entrypoint for conncalc. Parses arguments and calls the sub-pieces
 
