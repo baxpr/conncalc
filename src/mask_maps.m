@@ -10,7 +10,6 @@ for f = 1:length(fmri_niis)
 	% Resample mask to fMRI space and load
 	flags = struct('mask',true,'mean',false,'interp',0,'which',1, ...
         'wrap',[0 0 0],'prefix','r');
-	copyfile(mask_nii,[out_dir '/mask.nii']);
 	spm_reslice_quiet({[fmri_nii ',1'],mask_nii},flags);
 	[p,n,e] = fileparts(mask_nii);
 	rmask_nii = fullfile(p,['r' n e]);

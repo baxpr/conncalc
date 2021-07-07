@@ -24,6 +24,10 @@ if strcmp(roi_info.Properties.VariableNames{1},'Var1')
 	roi_info.Properties.VariableNames{'Var2'} = 'Region';
 end
 
+if height(roi_info)<2
+	error('Unable to process a single ROI')
+end
+
 % If we got a slant STATS output, rename the appropriate columns
 indR = strcmp(roi_info.Properties.VariableNames,'LabelName_BrainCOLOR_');
 indL = strcmp(roi_info.Properties.VariableNames,'LabelNumber_BrainCOLOR_');

@@ -1,14 +1,14 @@
-function roidata = extract_roidata(wfmri_nii,rwroi_nii,roi_csv,out_dir,tag)
+function roidata = extract_roidata(fmri_nii,rroi_nii,rroi_csv,out_dir,tag)
 
 % Load and count ROIs from the image
-Vroi = spm_vol(rwroi_nii);
+Vroi = spm_vol(rroi_nii);
 Yroi = spm_read_vols(Vroi);
 Yroi(isnan(Yroi(:))) = 0;
 roi_vals = unique(Yroi(:));
 roi_vals = roi_vals(roi_vals~=0);
 
 % Load the normalized ROI label file
-roi_info = readtable(roi_csv);
+roi_info = readtable(rroi_csv,'Delimiter','comma');
 
 % Check for a problem situation
 if ~all(sort(roi_vals) == sort(roi_info.Label))
@@ -16,7 +16,7 @@ if ~all(sort(roi_vals) == sort(roi_info.Label))
 end
 
 % Load fmri and reshape to time x voxel
-Vfmri = spm_vol(wfmri_nii);
+Vfmri = spm_vol(fmri_nii);
 Yfmri = spm_read_vols(Vfmri);
 Yfmri = reshape(Yfmri,[],size(Yfmri,4))';
 
