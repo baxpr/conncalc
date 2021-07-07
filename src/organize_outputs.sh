@@ -15,6 +15,10 @@ if [[ "${connmaps_out}" == "yes" ]] ; then
     mv connmaps/Z_*_removegm.nii
     gzip ZMAPS_REMOVEGM/*.nii
 
+    mkdir MASK
+    mv mask.nii MASK
+    gzip MASK/mask.nii
+
 fi
 
 mkdir RMATRIX
@@ -35,7 +39,3 @@ mv roi-labels.csv ROILABELS
 
 mkdir ROIDATA
 mv roidata_*.csv ROIDATA
-
-mkdir MASK
-mv mask.nii MASK
-gzip MASK/mask.nii

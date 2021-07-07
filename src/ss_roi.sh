@@ -26,17 +26,14 @@ for sl in -040 -030 -020 -010 000 010 020 030 040 050 060; do
         -v roi.nii:colormap=lut:outline=yes \
         -viewsize 800 800 --layout 1 --zoom 1.2 --viewport axial \
         -ras ${XYZ[0]} ${XYZ[1]} ${Z} \
-        -ss slice_fmri_${sl}.png \
-        >& /dev/null
-      
+        -ss slice_fmri_${sl}.png      
     
 	freeview \
         -v t1.nii \
         -v roi.nii:colormap=lut:outline=yes \
         -viewsize 800 800 --layout 1 --zoom 1.2 --viewport axial \
         -ras ${XYZ[0]} ${XYZ[1]} ${Z} \
-        -ss slice_t1_${sl}.png \
-        >& /dev/null
+        -ss slice_t1_${sl}.png
 
 done
 
