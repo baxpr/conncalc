@@ -27,11 +27,10 @@ From: ubuntu:20.04
 
 
 %post
-  apt-get update
-  apt-get install -y wget unzip zip xvfb ghostscript imagemagick bc   # Misc tools
-  apt-get install -y openjdk-8-jre                                    # Matlab
-  apt-get install -y libopenblas-base language-pack-en                # FSL
-  apt-get install -y libglu1-mesa                                     # Freeview
+  apt update
+  apt install -y wget unzip zip xvfb ghostscript imagemagick bc   # Misc tools
+  apt install -y openjdk-8-jre                                    # Matlab
+  apt install -y libglu1-mesa                                     # Freeview
   
   # We need to make the ImageMagick security policy more permissive
   # https://www.kb.cert.org/vuls/id/332928
