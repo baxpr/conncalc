@@ -33,7 +33,7 @@ Computes functional connectivity maps and matrices for a specified set of ROIs.
 - Extract mean time series from the supplied fMRI for each ROI in the ROI image.
 
 - Compute functional connectivity. The ROI-to-ROI connectivity matrix is computed, and also 
-  voxelwise connectivity maps if requested.
+  voxelwise connectivity Z maps if requested.
 
   - `R`, the correlation coefficient
   - `Z`, the Fisher transformed correlation, `atanh(R) * sqrt(N-3)` where `N` is number of time points
