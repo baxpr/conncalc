@@ -1,5 +1,13 @@
 function mask_maps(out_dir,mask_nii)
 
+if isempty(mask_nii)
+	V = spm_vol(fullfile(out_dir,'meanfmri.nii'));
+	mask_nii = fullfile(out_dir,'mask.nii');
+	V.fname = mask_nii;
+	V.pinfo(1:2) = [1 0];
+	spm_write_vol(V,ones(V.dim));
+end
+
 D = dir([out_dir '/connmaps/*Z_*_*gm.nii']);
 fmri_niis = strcat([out_dir '/connmaps/'],cellstr(char(D.name)));
 
