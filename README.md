@@ -19,8 +19,8 @@ Computes functional connectivity maps and matrices for a specified set of ROIs.
 - `t1_niigz`. T1 image for the PDF report.
 
 - `mask_niigz`. Brain mask - will be binarized and dilated and used to exclude any clearly 
-  ex-brain voxels in the stored connectivity maps. Optional - if 'none' or not supplied, 
-  no masking will be done.
+  ex-brain voxels in the stored connectivity maps. Supply 'none' to mask to the entire
+  volume (i.e. no masking).
   
 - `connmaps_out`. 'yes' or 'no' to choose whether to additionally store voxelwise 
   connectivity images for each ROI in the ROI image.
