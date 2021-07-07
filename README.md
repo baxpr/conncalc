@@ -12,14 +12,15 @@ Computes functional connectivity maps and matrices for a specified set of ROIs.
   MNI space 'AABHHIP_LR.nii.gz', see src/rois/README.md). Or, it may be any supplied 
   image. In the latter case, `roilabel_csv` must also be supplied; this file must contain 
   Label and Region columns, or may be the STATS output of a slant assessor. The ROI
-  image must be already be aligned with the T1 and the fMRI - no coregistration or warp
-  is performed on any of the images.
+  image must be already be aligned with the T1 and the fMRI (though needn't be sampled to
+  the same voxel grid or field of view) - no coregistration or warp is performed on any 
+  of the images.
 
 - `t1_niigz`. T1 image for the PDF report.
 
 - `mask_niigz`. Brain mask - will be binarized and dilated and used to exclude any clearly 
-  ex-brain voxels in the stored connectivity maps. Optional - if not supplied, no masking 
-  will be done.
+  ex-brain voxels in the stored connectivity maps. Optional - if 'none' or not supplied, 
+  no masking will be done.
   
 - `connmaps_out`. 'yes' or 'no' to choose whether to additionally store voxelwise 
   connectivity images for each ROI in the ROI image.
@@ -38,7 +39,5 @@ Computes functional connectivity maps and matrices for a specified set of ROIs.
   - `Z`, the Fisher transformed correlation, `atanh(R) * sqrt(N-3)` where `N` is number of time points
   - `Vdf`, `Pdf`, `Zdf` autocorrelation-adjusted connectivity metrics from https://github.com/asoroosh/xDF
   
-  
-
 - Generate a PDF report and organize outputs for XNAT.
 
