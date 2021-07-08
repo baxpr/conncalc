@@ -24,7 +24,7 @@ addOptional(P,'meanfmri_niigz','');
 addOptional(P,'t1_niigz','');
 
 % Brain mask to avoid storing an entire volume of junk
-addOptional(P,'mask_niigz','');
+addOptional(P,'mask_niigz','none');
 
 % Smoothing to apply to connectivity maps
 %addOptional(P,'fwhm','6');

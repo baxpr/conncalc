@@ -38,8 +38,8 @@ end
 
 % Normalize ROI names
 for h = 1:height(roi_info)
-	roi_info.Region{h} = sprintf('r%04d_%s', ...
-		roi_info.Label(h),regexprep(roi_info.Region{h},{'[%() ]+','_+$'},{'_', ''}));
+	roi_info.Region{h} = sprintf('r%04d_%s',roi_info.Label(h), ...
+		regexprep(roi_info.Region{h},{'[%() ]+','_+$'},{'_', ''}) );
 end
 
 % Drop any extra columns and save to file

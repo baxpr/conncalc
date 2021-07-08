@@ -14,6 +14,8 @@ for tag = {'removegm','keepgm','meanfmri','t1','mask'}
 	end
 	
 	outputfile = fullfile(inp.out_dir,[tag{1} '.nii.gz']);
+
+	disp(['Copying ' inputfile ' to ' outputfile])
 	copyfile(inputfile,outputfile);
 	system(['gunzip -f ' outputfile]);
 	outputfile = strrep(outputfile,'.nii.gz','.nii');
