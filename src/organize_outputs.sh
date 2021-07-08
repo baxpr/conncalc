@@ -33,7 +33,7 @@ mkdir DFMATRIX
 mv ?df_*.csv DFMATRIX
 
 mkdir ROIS
-mv roi.nii ROIS
+mv rroi.nii ROIS/roi.nii
 gzip ROIS/roi.nii
 
 mkdir ROILABELS
