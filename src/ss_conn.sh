@@ -40,18 +40,18 @@ cd ${out_dir}
 
 # Make images for each seed ROI. Bit of a hacky way to loop through lines of the
 # ROI label file, but it works
-run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass rmask.nii ${roinum} ${out_dir}/loc.txt
-maskloc=$(cat loc.txt) ; rm loc.txt ; maskloc=(${com// / })
+run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass rmask.nii 0 maskloc.txt
+maskloc=$(cat maskloc.txt); maskloc=(${maskloc// / })
 while IFS= read -r csvline; do
     echo $csvline
 	roinum=$(echo "${csvline}" | cut -f 1 -d ,)
 	if [[ "${roinum}" == "Label" ]] ; then continue ; fi
 	roiname=$(echo "${csvline}" | cut -f 2 -d ,)
-    run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass rroi.nii ${roinum} ${out_dir}/loc.txt
-	seedloc=$(cat loc.txt) ; rm loc.txt ; seedloc=(${com// / })
+    run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass rroi.nii ${roinum} seedloc.txt
+	seedloc=$(cat seedloc.txt); seedloc=(${seedloc// / })
 	echo Seed image ${roinum} ${roiname} ${maskloc} ${seedloc}
 	connmap
-done < ${out_dir}/rroi-labels.csv
+done < rroi-labels.csv
 
 # Combine into single pages, in sets of 4
 montage -mode concatenate \
