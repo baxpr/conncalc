@@ -39,25 +39,26 @@ function connmap {
 cd ${out_dir}
 
 # Make images for each seed ROI. Bit of a hacky way to loop through lines of the
-# ROI label file, but it works
+# ROI label file, because it makes a lot of assumptions, but it works. run_spm12.sh
+# hijacks our remaining lines via stdin if we don't use the < /dev/null
 run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass rmask.nii 0 maskloc.txt
 maskloc=$(cat maskloc.txt); maskloc=(${maskloc// / })
-while IFS= read -r csvline; do
-    echo $csvline
-	roinum=$(echo "${csvline}" | cut -f 1 -d ,)
+while IFS="," read -r roinum roiname; do
 	if [[ "${roinum}" == "Label" ]] ; then continue ; fi
-	roiname=$(echo "${csvline}" | cut -f 2 -d ,)
-    run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass rroi.nii ${roinum} seedloc.txt
+    run_spm12.sh ${MATLAB_RUNTIME} \
+        function ctr_of_mass rroi.nii ${roinum} seedloc.txt \
+        < /dev/null
 	seedloc=$(cat seedloc.txt); seedloc=(${seedloc// / })
-	echo Seed image ${roinum} ${roiname} ${maskloc} ${seedloc}
+	echo Seed image ${roinum} ${roiname} ${maskloc[@]} ${seedloc[@]}
 	connmap
 done < rroi-labels.csv
+rm maskloc.txt seedloc.txt
 
 # Combine into single pages, in sets of 4
 montage -mode concatenate \
 	conn_*.png \
 	-tile 1x4 -quality 100 -background black -gravity center \
-	-border 10 -bordercolor white shot_conn.png
+	-border 10 -bordercolor black shot_conn.png
 
 # Annotate
 convert -density 300 -gravity Center shot_conn*.png \
