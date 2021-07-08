@@ -57,8 +57,8 @@ rm maskloc.txt seedloc.txt
 # Combine into single pages, in sets of 4
 montage -mode concatenate \
 	conn_*.png \
-	-tile 1x4 -quality 100 -background black -gravity center \
-	-border 10 -bordercolor black shot_conn.png
+	-tile 1x4 -quality 100 -background white -gravity center \
+	-border 10 -bordercolor white shot_conn.png
 
 # Annotate
 convert -density 300 -gravity Center shot_conn*.png \
