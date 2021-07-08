@@ -64,3 +64,5 @@ convert \
     -gravity NorthWest -pointsize 12 -annotate +100+200 "${label_info}" \
     page_t1.png
 
+# Clean up
+rm slice_*.png

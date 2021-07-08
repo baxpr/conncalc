@@ -45,7 +45,7 @@ end
 % Drop any extra columns and save to file
 roi_info = roi_info(:,{'Label','Region'});
 [~,n,e] = fileparts(roi_csv);
-rroi_csv = fullfile(out_dir,[n e]);
+rroi_csv = fullfile(out_dir,['r' n e]);
 writetable(roi_info,rroi_csv)
 
 

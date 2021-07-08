@@ -10,16 +10,16 @@ mv conncalc.pdf PDF
 if [[ "${connmaps_out}" == "yes" ]] ; then
 
     mkdir ZMAPS_KEEPGM
-    mv connmaps/Z_*_keepgm.nii
+    mv connmaps/Z_*_keepgm.nii ZMAPS_KEEPGM
     gzip ZMAPS_KEEPGM/*.nii
 
     mkdir ZMAPS_REMOVEGM
-    mv connmaps/Z_*_removegm.nii
+    mv connmaps/Z_*_removegm.nii ZMAPS_REMOVEGM
     gzip ZMAPS_REMOVEGM/*.nii
 
     mkdir MASK
-    mv mask.nii MASK
-    gzip MASK/mask.nii
+    mv rmask.nii MASK/rmask.nii
+    gzip MASK/rmask.nii
 
 fi
 
@@ -33,11 +33,11 @@ mkdir DFMATRIX
 mv ?df_*.csv DFMATRIX
 
 mkdir ROIS
-mv rroi.nii ROIS/roi.nii
-gzip ROIS/roi.nii
+mv rroi.nii ROIS/rroi.nii
+gzip ROIS/rroi.nii
 
 mkdir ROILABELS
-mv roi-labels.csv ROILABELS
+mv rroi-labels.csv ROILABELS
 
 mkdir ROIDATA
 mv roidata_*.csv ROIDATA

@@ -3,38 +3,36 @@
 echo Screenshots maps
 
 function connmap {
-	# 1 IMG
-	# 2 name
-	# 3-5 x y z
-	# connmap sZ_LHIPP_removegm.nii hipp -25 -20 -16
+
+    local zmap=connmaps/Z_${roiname}_removegm.nii
 
     freeview \
         -v ${out_dir}/t1.nii \
-        -v ${out_dir}/${1}:colormap=heat:heatscale=90,95,100:percentile=true \
-        -viewsize 400 400 --layout 1 --zoom 1.3 --viewport sagittal \
-        -ras ${3} -18 18 \
-        -ss conn_${2}_sag.png
+        -v ${out_dir}/${zmap}:colormap=heat:heatscale=90,95,100:percentile=true \
+        -viewsize 400 400 --layout 1 --zoom 1.2 --viewport sagittal \
+        -ras ${seedloc[0]} ${maskloc[1]} ${maskloc[2]} \
+        -ss conn_${roiname}_sag.png
 
     freeview \
         -v ${out_dir}/t1.nii \
-        -v ${out_dir}/${1}:colormap=heat:heatscale=90,95,100:percentile=true \
-        -viewsize 400 400 --layout 1 --zoom 1.3 --viewport coronal \
-        -ras 0 ${4} 18 \
-        -ss conn_${2}_cor.png         
+        -v ${out_dir}/${zmap}:colormap=heat:heatscale=90,95,100:percentile=true \
+        -viewsize 400 400 --layout 1 --zoom 1.2 --viewport coronal \
+        -ras ${maskloc[0]} ${seedloc[1]} ${maskloc[2]} \
+        -ss conn_${roiname}_cor.png         
 
     freeview \
         -v ${out_dir}/t1.nii \
-        -v ${out_dir}/${1}:colormap=heat:heatscale=90,95,100:percentile=true \
-        -viewsize 400 400 --layout 1 --zoom 1.3 --viewport axial \
-        -ras 0 -18 ${5} \
-        -ss conn_${2}_axi.png
+        -v ${out_dir}/${zmap}:colormap=heat:heatscale=90,95,100:percentile=true \
+        -viewsize 400 400 --layout 1 --zoom 1.2 --viewport axial \
+        -ras ${maskloc[0]} ${maskloc[1]} ${seedloc[2]} \
+        -ss conn_${roiname}_axi.png
 
-	montage -mode concatenate -title "${2}" -stroke white -fill white \
-        conn_${2}_sag.png conn_${2}_cor.png conn_${2}_axi.png \
+	montage -mode concatenate -title "${roiname}" -stroke white -fill white \
+        conn_${roiname}_sag.png conn_${roiname}_cor.png conn_${roiname}_axi.png \
         -tile 3x -quality 100 -background black -gravity center \
-        -border 10 -bordercolor black conn_${2}.png
+        -border 10 -bordercolor black conn_${roiname}.png
 	  
-	rm conn_${2}_sag.png conn_${2}_cor.png conn_${2}_axi.png
+	rm conn_${roiname}_sag.png conn_${roiname}_cor.png conn_${roiname}_axi.png
 
 }
 
@@ -42,15 +40,17 @@ cd ${out_dir}
 
 # Make images for each seed ROI. Bit of a hacky way to loop through lines of the
 # ROI label file, but it works
+run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass mask.nii ${roinum} ${out_dir}/loc.txt
+maskloc=$(cat loc.txt) ; rm loc.txt ; maskloc=(${com// / })
 while IFS= read -r csvline; do
+    echo $csvline
 	roinum=$(echo "${csvline}" | cut -f 1 -d ,)
 	if [[ "${roinum}" == "Label" ]] ; then continue ; fi
 	roiname=$(echo "${csvline}" | cut -f 2 -d ,)
     run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass rroi.nii ${roinum} ${out_dir}/loc.txt
-	location=$(cat loc.txt)
-    rm loc.txt
-	echo Seed image ${r} ${roiname} ${roinum} ${location}
-	connmap "connmaps/Z_${roiname}_removegm.nii" "${roiname}" ${location}
+	seedloc=$(cat loc.txt) ; rm loc.txt ; seedloc=(${com// / })
+	echo Seed image ${roinum} ${roiname} ${maskloc} ${seedloc}
+	connmap
 done < ${out_dir}/roi-labels.csv
 
 # Combine into single pages, in sets of 4
