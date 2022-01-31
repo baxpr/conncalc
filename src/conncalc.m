@@ -33,7 +33,7 @@ addOptional(P,'mask_niigz','none');
 addOptional(P,'connmaps_out','yes')
 
 % Subject info if on XNAT
-addOptional(P,'label_info','UNKNOWN SCAN');
+addOptional(P,'label_info','');
 
 % Where to store outputs
 addOptional(P,'out_dir','/OUTPUTS');
