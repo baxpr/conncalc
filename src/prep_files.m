@@ -31,7 +31,7 @@ if isempty(fileparts(inp.roi_niigz))
 	copyfile(which(inp.roi_niigz),roi_niigz);
 	system(['gunzip -f ' roi_niigz]);
 	outfnames.roi_nii = strrep(roi_niigz,'.nii.gz','.nii');
-	[~,n2] = fileparts(roi_nii);
+	[~,n2] = fileparts(outfnames.roi_nii);
 	outfnames.roi_csv = fullfile(inp.out_dir,'roi-labels.csv');
 	copyfile(which([n2 '-labels.csv']),outfnames.roi_csv);
 else
