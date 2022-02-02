@@ -27,13 +27,13 @@ end
 
 if isempty(fileparts(inp.roi_niigz))
 	% Use an ROI file from container if no path provided
+	roitag = strrep(inp.roi_niigz,'.nii.gz','');
 	roi_niigz = fullfile(inp.out_dir,'roi.nii.gz');
 	copyfile(which(inp.roi_niigz),roi_niigz);
 	system(['gunzip -f ' roi_niigz]);
 	outfnames.roi_nii = strrep(roi_niigz,'.nii.gz','.nii');
-	[~,n2] = fileparts(outfnames.roi_nii);
 	outfnames.roi_csv = fullfile(inp.out_dir,'roi-labels.csv');
-	copyfile(which([n2 '-labels.csv']),outfnames.roi_csv);
+	copyfile(which([roitag '-labels.csv']),outfnames.roi_csv);
 else
 	% Otherwise use externally supplied ROI file
 	roi_niigz = fullfile(inp.out_dir,'roi.nii.gz');
