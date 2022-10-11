@@ -6,6 +6,7 @@
 export connmaps_out=no
 export mask_niigz=none
 export label_info=
+export roideffwd_niigz=none
 export out_dir=/OUTPUTS
 
 # Parse input options
@@ -36,6 +37,7 @@ run_spm12.sh ${MATLAB_RUNTIME} function conncalc \
     removegm_niigz "${removegm_niigz}" \
     keepgm_niigz "${keepgm_niigz}" \
     meanfmri_niigz "${meanfmri_niigz}" \
+    roideffwd_niigz "${roideffwd_niigz}" \
     connmaps_out "${connmaps_out}" \
     label_info "${label_info}" \
     out_dir "${out_dir}"

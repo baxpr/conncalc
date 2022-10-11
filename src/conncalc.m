@@ -20,6 +20,11 @@ addOptional(P,'removegm_niigz','');
 addOptional(P,'keepgm_niigz','');
 addOptional(P,'meanfmri_niigz','');
 
+% Optionally, supply a warp that will be used to resample the ROI image
+% from atlas to native space before signal extraction. Use with native
+% space fMRI and atlas space ROI image.
+addOptional(P,'roideffwd_niigz','none');
+
 % T1, e.g. bias corrected T1 from cat12
 addOptional(P,'t1_niigz','');
 

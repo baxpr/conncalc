@@ -1,17 +1,25 @@
-function [rroi_nii,rroi_csv] = resample_roi(roi_nii,meanfmri_nii,roi_csv,out_dir)
+function [rroi_nii,rroi_csv] = resample_roi(roi_nii,roideffwd_nii,meanfmri_nii,roi_csv,out_dir)
 
 %% Resample ROI image
 
-% Params. Critically, 0 order (nearest neighbor) interpolation
-flags = struct('mask',true,'mean',false,'interp',0,'which',1, ...
-	'wrap',[0 0 0],'prefix','r');
+if isempty(roideffwd_nii)
+	% ROI and fmri in same space
 
-% Use SPM to reslice
-spm_reslice_quiet({meanfmri_nii roi_nii},flags);
-
-% Figure out the new filename
-[p,n,e] = fileparts(roi_nii);
-rroi_nii = fullfile(p,['r' n e]);
+	% Params. Critically, 0 order (nearest neighbor) interpolation
+	flags = struct('mask',true,'mean',false,'interp',0,'which',1, ...
+		'wrap',[0 0 0],'prefix','r');
+	
+	% Use SPM to reslice
+	spm_reslice_quiet({meanfmri_nii roi_nii},flags);
+	
+	% Figure out the new filename
+	[p,n,e] = fileparts(roi_nii);
+	rroi_nii = fullfile(p,['r' n e]);
+	
+else
+	% Warp ROI back to fmri native space
+	FIXME WE ARE HERE
+end
 
 
 %% Get ROI labels in a standard format
