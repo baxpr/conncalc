@@ -4,7 +4,7 @@ outfnames = struct();
 
 % Copy files to out_dir and unzip. mask is optional, return empty if 'none'
 % passed
-for tag = {'removegm','keepgm','meanfmri','t1','mask','roideffwd'}
+for tag = {'removegm','keepgm','meanfmri','t1','mask','roidefinv'}
 
 	inputfile = inp.([tag{1} '_niigz']);
 
@@ -12,7 +12,7 @@ for tag = {'removegm','keepgm','meanfmri','t1','mask','roideffwd'}
 		outfnames.([tag{1} '_nii']) = '';
 		continue
 	end
-	if strcmp(tag{1},'roideffwd') && strcmp(inputfile,'none')
+	if strcmp(tag{1},'roidefinv') && strcmp(inputfile,'none')
 		outfnames.([tag{1} '_nii']) = '';
 		continue
 	end

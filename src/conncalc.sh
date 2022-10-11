@@ -17,7 +17,7 @@ while [[ $# -gt 0 ]]; do
         --mask_niigz)      export mask_niigz="$2";      shift; shift ;;
         --roi_niigz)       export roi_niigz="$2";       shift; shift ;;
         --roilabel_csv)    export roilabel_csv="$2";    shift; shift ;;
-        --roideffwd_niigz) export roideffwd_niigz="$2"; shift; shift ;;
+        --roidefinv_niigz) export roidefinv_niigz="$2"; shift; shift ;;
         --removegm_niigz)  export removegm_niigz="$2";  shift; shift ;;
         --keepgm_niigz)    export keepgm_niigz="$2";    shift; shift ;;
         --meanfmri_niigz)  export meanfmri_niigz="$2";  shift; shift ;;
@@ -38,7 +38,7 @@ run_spm12.sh ${MATLAB_RUNTIME} function conncalc \
     removegm_niigz "${removegm_niigz}" \
     keepgm_niigz "${keepgm_niigz}" \
     meanfmri_niigz "${meanfmri_niigz}" \
-    roideffwd_niigz "${roideffwd_niigz}" \
+    roidefinv_niigz "${roideffwd_niigz}" \
     connmaps_out "${connmaps_out}" \
     label_info "${label_info}" \
     out_dir "${out_dir}"

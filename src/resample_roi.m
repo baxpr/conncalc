@@ -1,8 +1,8 @@
-function [rroi_nii,rroi_csv] = resample_roi(roi_nii,roideffwd_nii,meanfmri_nii,roi_csv,out_dir)
+function [rroi_nii,rroi_csv] = resample_roi(roi_nii,roidefinv_nii,meanfmri_nii,roi_csv,out_dir)
 
 %% Resample ROI image
 
-if isempty(roideffwd_nii)
+if isempty(roidefinv_nii)
 	% ROI and fmri in same space
 
 	% Params. Critically, 0 order (nearest neighbor) interpolation
@@ -17,8 +17,17 @@ if isempty(roideffwd_nii)
 	rroi_nii = fullfile(p,['r' n e]);
 	
 else
-	% Warp ROI back to fmri native space
-	FIXME WE ARE HERE
+	% Warp ROI from atlas to fmri native space
+	clear matlabbatch
+	matlabbatch{1}.spm.util.defs.comp{1}.def = {roidefinv_nii};
+	matlabbatch{1}.spm.util.defs.comp{2}.id.space = {meanfmri_nii};
+	matlabbatch{1}.spm.util.defs.out{1}.pull.fnames = {roi_nii};
+	matlabbatch{1}.spm.util.defs.out{1}.pull.savedir.saveusr = {out_dir};
+	matlabbatch{1}.spm.util.defs.out{1}.pull.interp = 0;
+	matlabbatch{1}.spm.util.defs.out{1}.pull.mask = 0;
+	matlabbatch{1}.spm.util.defs.out{1}.pull.fwhm = [0 0 0];
+	matlabbatch{1}.spm.util.defs.out{1}.pull.prefix = '';
+	spm_jobman('run',matlabbatch);
 end
 
 
