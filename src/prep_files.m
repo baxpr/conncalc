@@ -18,6 +18,9 @@ for tag = {'removegm','keepgm','meanfmri','t1','mask','roidefinv'}
 	end
 	
 	outputfile = fullfile(inp.out_dir,[tag{1} '.nii.gz']);
+	if strcmp(tag{1},'roidefinv')
+		outputfile = fullfile(inp.out_dir,'iy_roi.nii.gz');
+	end
 
 	disp(['Copying ' inputfile ' to ' outputfile])
 	copyfile(inputfile,outputfile);

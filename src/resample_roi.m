@@ -28,6 +28,8 @@ else
 	matlabbatch{1}.spm.util.defs.out{1}.pull.fwhm = [0 0 0];
 	matlabbatch{1}.spm.util.defs.out{1}.pull.prefix = '';
 	spm_jobman('run',matlabbatch);
+	[p,n,e] = fileparts(roi_nii);
+	rroi_nii = fullfile(p,['w' n e]);
 end
 
 
