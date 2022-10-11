@@ -13,16 +13,17 @@ export out_dir=/OUTPUTS
 while [[ $# -gt 0 ]]; do
     key="$1"
     case $key in      
-        --t1_niigz)        export t1_niigz="$2";       shift; shift ;;
-        --mask_niigz)      export mask_niigz="$2";     shift; shift ;;
-        --roi_niigz)       export roi_niigz="$2";      shift; shift ;;
-        --roilabel_csv)    export roilabel_csv="$2";   shift; shift ;;
-        --removegm_niigz)  export removegm_niigz="$2"; shift; shift ;;
-        --keepgm_niigz)    export keepgm_niigz="$2";   shift; shift ;;
-        --meanfmri_niigz)  export meanfmri_niigz="$2"; shift; shift ;;
-        --connmaps_out)    export connmaps_out="$2";   shift; shift ;;
-        --label_info)      export label_info="$2";     shift; shift ;;
-        --out_dir)         export out_dir="$2";        shift; shift ;;
+        --t1_niigz)        export t1_niigz="$2";        shift; shift ;;
+        --mask_niigz)      export mask_niigz="$2";      shift; shift ;;
+        --roi_niigz)       export roi_niigz="$2";       shift; shift ;;
+        --roilabel_csv)    export roilabel_csv="$2";    shift; shift ;;
+        --roideffwd_niigz) export roideffwd_niigz="$2"; shift; shift ;;
+        --removegm_niigz)  export removegm_niigz="$2";  shift; shift ;;
+        --keepgm_niigz)    export keepgm_niigz="$2";    shift; shift ;;
+        --meanfmri_niigz)  export meanfmri_niigz="$2";  shift; shift ;;
+        --connmaps_out)    export connmaps_out="$2";    shift; shift ;;
+        --label_info)      export label_info="$2";      shift; shift ;;
+        --out_dir)         export out_dir="$2";         shift; shift ;;
         *) echo "Input ${1} not recognized"; shift ;;
     esac
 done
