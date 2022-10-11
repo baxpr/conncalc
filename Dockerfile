@@ -18,7 +18,7 @@ RUN wget -nv https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/d
     /opt/mcr_installer/install -mode silent -agreeToLicense yes && \
     rm -r /opt/mcr_installer /opt/mcr_installer.zip
 
-# Install Freesurfer. We just need freeview
+# Install Freesurfer. We just need freeview, and Yeo2011 atlas
 RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.3.2/freesurfer-linux-centos7_x86_64-7.3.2.tar.gz \
     -O /opt/freesurfer.tgz && \
     mkdir -p /usr/local/freesurfer/bin /usr/local/freesurfer/lib/vtk && \
