@@ -8,7 +8,8 @@ P = inputParser;
 %
 %   (1) Filename with no path, e.g. 'ABHHIP_LR.nii.gz'. In this case the
 %       file is assumed to exist in the container with a matching label file
-%       present e.g. 'ABHHIP_LR-label.nii.gz'.
+%       present e.g. 'ABHHIP_LR-label.nii.gz'. Available options:
+%          Yeo2011_17Networks_MNI152_FreeSurferConformed1mm_LiberalMask.nii.gz
 %
 %   (2) Filename with path. In this case the file is provided as input and
 %       the roilabel_csv must also be provided with ROI labels.
