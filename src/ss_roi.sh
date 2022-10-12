@@ -9,6 +9,11 @@ thedate=$(date)
 # Work in output directory
 cd ${out_dir}
 
+# If our ROI image is named wroi.nii, rename to meet assumptions below and in ss_conn.sh
+if [ -f wroi.nii ]; then
+    mv wroi.nii rroi.nii
+fi
+
 # Find center of mass of mean fmri
 run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass meanfmri.nii 0 ${out_dir}/com.txt
 com=$(cat com.txt)
@@ -23,14 +28,14 @@ for sl in -040 -030 -020 -010 000 010 020 030 040 050 060; do
 
     freeview \
         -v meanfmri.nii \
-        -v roi.nii:colormap=lut:outline=yes \
+        -v rroi.nii:colormap=lut:outline=yes \
         -viewsize 800 800 --layout 1 --zoom 1.2 --viewport axial \
         -ras ${XYZ[0]} ${XYZ[1]} ${Z} \
         -ss slice_fmri_${sl}.png      
     
 	freeview \
         -v t1.nii \
-        -v roi.nii:colormap=lut:outline=yes \
+        -v rroi.nii:colormap=lut:outline=yes \
         -viewsize 800 800 --layout 1 --zoom 1.2 --viewport axial \
         -ras ${XYZ[0]} ${XYZ[1]} ${Z} \
         -ss slice_t1_${sl}.png

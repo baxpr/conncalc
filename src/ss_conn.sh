@@ -38,11 +38,6 @@ function connmap {
 
 cd ${out_dir}
 
-# If our ROI image is named wroi.nii, rename to meet assumptions below
-if [ -f wroi.nii ]; then
-    mv wroi.nii rroi.nii
-fi
-
 # Make images for each seed ROI. Bit of a hacky way to loop through lines of the
 # ROI label file, because it makes a lot of assumptions, but it works. run_spm12.sh
 # hijacks our remaining lines via stdin if we don't use the < /dev/null
