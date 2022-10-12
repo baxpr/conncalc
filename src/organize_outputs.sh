@@ -8,7 +8,8 @@ mkdir PDF
 mv conncalc.pdf PDF
 
 mkdir T1
-mv t1.nii.gz T1
+mv t1.nii T1
+gzip T1/t1.nii
 
 if [[ "${connmaps_out}" == "yes" ]] ; then
 

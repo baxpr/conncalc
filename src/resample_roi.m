@@ -29,8 +29,18 @@ else
 	matlabbatch{1}.spm.util.defs.out{1}.pull.prefix = '';
 	spm_jobman('run',matlabbatch);
 	[p,n,e] = fileparts(roi_nii);
-	rroi_nii = fullfile(p,['w' n e]);
+	rroi_nii = fullfile(p,['r' n e]);
+	movefile(fullfile(p,['w' n e]),rroi_nii);
 end
+
+
+%% Convert any NaN values to zero, round values, fix scaling
+V = spm_vol(rroi_nii);
+Y = spm_read_vols(V);
+Y(isnan(Y(:))) = 0;
+V.dt(1) = spm_type('uint16');
+V.pinfo(1:2) = [1 0];
+spm_write_vol(V,Y);
 
 
 %% Get ROI labels in a standard format

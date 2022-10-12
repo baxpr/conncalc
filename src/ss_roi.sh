@@ -9,11 +9,6 @@ thedate=$(date)
 # Work in output directory
 cd ${out_dir}
 
-# If our ROI image is named wroi.nii, rename to meet assumptions below and in ss_conn.sh
-if [ -f wroi.nii ]; then
-    mv wroi.nii rroi.nii
-fi
-
 # Find center of mass of mean fmri
 run_spm12.sh ${MATLAB_RUNTIME} function ctr_of_mass meanfmri.nii 0 ${out_dir}/com.txt
 com=$(cat com.txt)
