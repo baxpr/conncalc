@@ -16,19 +16,24 @@ Computes functional connectivity maps and matrices for a specified set of ROIs.
   the same voxel grid or field of view) - no coregistration or warp is performed on any 
   of the images.
 
-- `t1_niigz`. T1 image for the PDF report.
+- `t1_niigz`. T1 image for the PDF report. Could be BIAS_??? from cat12.
 
 - `mask_niigz`. Brain mask - will be binarized and dilated and used to exclude any clearly 
   ex-brain voxels in the stored connectivity maps. Supply 'none' to mask to the entire
-  volume (i.e. no masking).
+  volume (i.e. no masking). Could be ICV_??? from cat12.
+  
+- `roidefinv_niigz`. Optional deformation from atlas space to native space. Supply this
+  when the ROI image is in atlas space but the preprocessed fMRI are in native space.
+  Could be DEF_INV from cat12. If this argument is not supplied, ROI and fMRI are assumed
+  to be in the same space.
   
 - `connmaps_out`. 'yes' or 'no' to choose whether to additionally store voxelwise 
   connectivity images for each ROI in the ROI image.
 
 ## Pipeline
 
-- Resample the ROI image to match the fMRI voxel sampling. It's assumed both are already 
-  aligned.
+- Resample the ROI image to match the fMRI voxel sampling, with or without a warp depending
+  on the `roidefinv_niigz` parameter.
   
 - Extract mean time series from the supplied fMRI for each ROI in the ROI image.
 
