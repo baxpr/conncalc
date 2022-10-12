@@ -27,13 +27,7 @@ RUN wget -nv https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/d
 ENV MATLAB_SHELL=/bin/bash
 ENV MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/v97
 
-# Install Freesurfer (full install)
-#RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.2.0/freesurfer-linux-centos7_x86_64-7.2.0.tar.gz \
-#    -O /opt/freesurfer.tgz && \
-#    tar -zxf /opt/freesurfer.tgz -C /usr/local && \
-#    rm /opt/freesurfer.tgz
-
-# Freeview only
+# Install Freesurfer (freeview only)
 RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.2.0/freesurfer-linux-centos7_x86_64-7.2.0.tar.gz \
     -O /opt/freesurfer.tgz && \
     mkdir -p /usr/local/freesurfer/bin /usr/local/freesurfer/lib/vtk && \
@@ -59,6 +53,7 @@ ENV FUNCTIONALS_DIR=/usr/local/freesurfer/sessions
 ENV FS_OVERRIDE=0
 ENV FIX_VERTEX_AREA=""
 ENV FSF_OUTPUT_FORMAT=nii.gz
+ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 ENV MINC_BIN_DIR=/usr/local/freesurfer/mni/bin
 ENV MINC_LIB_DIR=/usr/local/freesurfer/mni/lib
 ENV MNI_DIR=/usr/local/freesurfer/mni
