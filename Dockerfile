@@ -27,6 +27,9 @@ RUN wget -nv https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/d
 ENV MATLAB_SHELL=/bin/bash
 ENV MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/v97
 
+# Matlab executable must be run at build to extract the CTF archive
+RUN run_spm12.sh ${MATLAB_RUNTIME} function quit
+
 # Install Freesurfer (freeview only)
 RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.2.0/freesurfer-linux-centos7_x86_64-7.2.0.tar.gz \
     -O /opt/freesurfer.tgz && \
@@ -53,7 +56,7 @@ ENV FUNCTIONALS_DIR=/usr/local/freesurfer/sessions
 ENV FS_OVERRIDE=0
 ENV FIX_VERTEX_AREA=""
 ENV FSF_OUTPUT_FORMAT=nii.gz
-ENV XDG_RUNTIME_DIR=/tmp/runtime-root
+ENV XDG_RUNTIME_DIR=/tmp
 ENV MINC_BIN_DIR=/usr/local/freesurfer/mni/bin
 ENV MINC_LIB_DIR=/usr/local/freesurfer/mni/lib
 ENV MNI_DIR=/usr/local/freesurfer/mni
@@ -61,19 +64,18 @@ ENV MNI_DATAPATH=/usr/local/freesurfer/mni/data
 ENV MNI_PERL5LIB=/usr/local/freesurfer/mni/share/perl5
 ENV PERL5LIB=/usr/local/freesurfer/mni/share/perl5
 
-# Copy the pipeline code. Matlab must be compiled before building. We need to
-# make the ImageMagick security policy more permissive to be able to write PDFs.
+# We need to make the ImageMagick security policy more permissive 
+# to be able to write PDFs.
+COPY ImageMagick-policy.xml /etc/ImageMagick-6/policy.xml
+
+# Copy the pipeline code. Matlab must be compiled before building. 
 COPY build /opt/conncalc/build
 COPY bin /opt/conncalc/bin
 COPY src /opt/conncalc/src
 COPY README.md /opt/conncalc
-COPY ImageMagick-policy.xml /etc/ImageMagick-6/policy.xml
 
 # Add pipeline to system path
 ENV PATH=/opt/conncalc/src:/opt/conncalc/bin:${PATH}
-
-# Matlab executable must be run at build to extract the CTF archive
-RUN run_spm12.sh ${MATLAB_RUNTIME} function quit
 
 # Entrypoint
 ENTRYPOINT ["xwrapper.sh","conncalc.sh"]
