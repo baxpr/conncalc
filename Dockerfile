@@ -6,7 +6,7 @@ FROM centos:7
 # java-1.8.0-openjdk                                 for MCR
 # mesa-libGLU mesa-dri-drivers                       for FS with xvfb
 RUN yum -y update && \
-    yum -y install wget tar zip unzip && \
+    yum -y install wget tar zip unzip xvfb && \
     yum -y install bc libgomp perl tcsh vim-common && \
     yum -y install mesa-libGL libXext libSM libXrender libXmu && \
     yum -y install java-1.8.0-openjdk && \
@@ -24,10 +24,17 @@ RUN wget -nv https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/d
 ENV MATLAB_SHELL=/bin/bash
 ENV MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/v97
 
-# Install Freesurfer
+# Install Freesurfer (freeview only)
 RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.3.2/freesurfer-linux-centos7_x86_64-7.3.2.tar.gz \
     -O /opt/freesurfer.tgz && \
-    tar -zxf /opt/freesurfer.tgz -C /usr/local && \
+    mkdir -p /usr/local/freesurfer/bin /usr/local/freesurfer/lib/vtk && \
+    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/bin/freeview && \
+    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/bin/qt.conf && \
+    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/build-stamp.txt && \
+    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/SetUpFreeSurfer.sh && \
+    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/FreeSurferEnv.sh && \
+    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/lib/qt && \
+    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/lib/vtk && \
     rm /opt/freesurfer.tgz
   
 # Freesurfer env
