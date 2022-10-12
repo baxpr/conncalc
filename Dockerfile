@@ -5,12 +5,15 @@ FROM centos:7
 #     mesa-libGL libXext libSM libXrender libXmu
 # java-1.8.0-openjdk                                 for MCR
 # mesa-libGLU mesa-dri-drivers                       for FS with xvfb
+# xorg-x11-server-Xvfb xorg-x11-xauth which          xvfb
 RUN yum -y update && \
-    yum -y install wget tar zip unzip xvfb && \
+    yum -y install wget tar zip unzip && \
     yum -y install bc libgomp perl tcsh vim-common && \
     yum -y install mesa-libGL libXext libSM libXrender libXmu && \
     yum -y install java-1.8.0-openjdk && \
     yum -y install mesa-libGLU mesa-dri-drivers && \
+    yum -y install xorg-x11-server-Xvfb xorg-x11-xauth which && \
+    yum -y install ImageMagick && \
     yum clean all
 
 # Install the MCR
@@ -24,8 +27,14 @@ RUN wget -nv https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/d
 ENV MATLAB_SHELL=/bin/bash
 ENV MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/v97
 
-# Install Freesurfer (freeview only)
-RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.3.2/freesurfer-linux-centos7_x86_64-7.3.2.tar.gz \
+# Install Freesurfer (full install)
+#RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.2.0/freesurfer-linux-centos7_x86_64-7.2.0.tar.gz \
+#    -O /opt/freesurfer.tgz && \
+#    tar -zxf /opt/freesurfer.tgz -C /usr/local && \
+#    rm /opt/freesurfer.tgz
+
+# Freeview only
+RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.2.0/freesurfer-linux-centos7_x86_64-7.2.0.tar.gz \
     -O /opt/freesurfer.tgz && \
     mkdir -p /usr/local/freesurfer/bin /usr/local/freesurfer/lib/vtk && \
     tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/bin/freeview && \
@@ -36,7 +45,7 @@ RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.3.2/freesu
     tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/lib/qt && \
     tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/lib/vtk && \
     rm /opt/freesurfer.tgz
-  
+ 
 # Freesurfer env
 ENV OS=Linux
 ENV PATH=/usr/local/freesurfer/bin:/usr/local/freesurfer/fsfast/bin:/usr/local/freesurfer/tktools:/usr/local/freesurfer/mni/bin:${PATH}
