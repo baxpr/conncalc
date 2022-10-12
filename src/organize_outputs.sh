@@ -7,6 +7,9 @@ cd "${out_dir}"
 mkdir PDF
 mv conncalc.pdf PDF
 
+mkdir T1
+mv t1.nii.gz T1
+
 if [[ "${connmaps_out}" == "yes" ]] ; then
 
     mkdir ZMAPS_KEEPGM
