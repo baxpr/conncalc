@@ -1,15 +1,16 @@
-FROM ubuntu:20.04
+FROM centos:7
 
 # Initial system
-# wget unzip zip xvfb ghostscript imagemagick bc     # Misc tools
-# openjdk-8-jre                                      # Matlab MCR
-# libglu1-mesa language-pack-en                      # Freeview
-RUN apt update -y && \
-    DEBIAN_FRONTEND=noninteractive apt install -y \
-        wget unzip zip xvfb ghostscript imagemagick bc \
-        openjdk-8-jre \
-        libglu1-mesa language-pack-en \
-    && apt clean && apt -y autoremove
+# bc libgomp perl tar tcsh wget vim-common           for FS
+#     mesa-libGL libXext libSM libXrender libXmu
+# java-1.8.0-openjdk                                 for MCR
+# mesa-libGLU mesa-dri-drivers                       for FS with xvfb
+RUN yum -y update && \
+    yum -y install bc libgomp perl tar tcsh wget vim-common && \
+    yum -y install mesa-libGL libXext libSM libXrender libXmu && \
+    yum -y install java-1.8.0-openjdk && \
+    yum -y install mesa-libGLU mesa-dri-drivers && \
+    yum clean all
 
 # Install the MCR
 RUN wget -nv https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019b_Update_6_glnxa64.zip \
@@ -18,21 +19,35 @@ RUN wget -nv https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/d
     /opt/mcr_installer/install -mode silent -agreeToLicense yes && \
     rm -r /opt/mcr_installer /opt/mcr_installer.zip
 
-# Install Freesurfer. We just need freeview, and Yeo2011 atlas
+# Matlab env
+ENV MATLAB_SHELL=/bin/bash
+ENV MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/v97
+
+# Install Freesurfer
 RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.3.2/freesurfer-linux-centos7_x86_64-7.3.2.tar.gz \
     -O /opt/freesurfer.tgz && \
-    mkdir -p /usr/local/freesurfer/bin /usr/local/freesurfer/lib/vtk && \
-    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/bin/freeview && \
-    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/bin/qt.conf && \
-    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/build-stamp.txt && \
-    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/SetUpFreeSurfer.sh && \
-    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/FreeSurferEnv.sh && \
-    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/lib/qt && \
-    tar -zxf /opt/freesurfer.tgz -C /usr/local freesurfer/lib/vtk && \
+    tar -zxf /opt/freesurfer.tgz -C /usr/local && \
     rm /opt/freesurfer.tgz
   
-# Freeview needs a machine id here
-RUN dbus-uuidgen > /etc/machine-id
+# Freesurfer env
+ENV OS=Linux
+ENV PATH=/usr/local/freesurfer/bin:/usr/local/freesurfer/fsfast/bin:/usr/local/freesurfer/tktools:/usr/local/freesurfer/mni/bin:${PATH}
+ENV FREESURFER_HOME=/usr/local/freesurfer
+ENV FREESURFER=/usr/local/freesurfer
+ENV SUBJECTS_DIR=/usr/local/freesurfer/subjects
+ENV LOCAL_DIR=/usr/local/freesurfer/local
+ENV FSFAST_HOME=/usr/local/freesurfer/fsfast
+ENV FMRI_ANALYSIS_DIR=/usr/local/freesurfer/fsfast
+ENV FUNCTIONALS_DIR=/usr/local/freesurfer/sessions
+ENV FS_OVERRIDE=0
+ENV FIX_VERTEX_AREA=""
+ENV FSF_OUTPUT_FORMAT=nii.gz
+ENV MINC_BIN_DIR=/usr/local/freesurfer/mni/bin
+ENV MINC_LIB_DIR=/usr/local/freesurfer/mni/lib
+ENV MNI_DIR=/usr/local/freesurfer/mni
+ENV MNI_DATAPATH=/usr/local/freesurfer/mni/data
+ENV MNI_PERL5LIB=/usr/local/freesurfer/mni/share/perl5
+ENV PERL5LIB=/usr/local/freesurfer/mni/share/perl5
 
 # Copy the pipeline code. Matlab must be compiled before building. We need to
 # make the ImageMagick security policy more permissive to be able to write PDFs.
@@ -41,10 +56,6 @@ COPY bin /opt/conncalc/bin
 COPY src /opt/conncalc/src
 COPY README.md /opt/conncalc
 COPY ImageMagick-policy.xml /etc/ImageMagick-6/policy.xml
-
-# Matlab env
-ENV MATLAB_SHELL=/bin/bash
-ENV MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/v97
 
 # Add pipeline to system path
 ENV PATH=/opt/conncalc/src:/opt/conncalc/bin:${PATH}
