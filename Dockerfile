@@ -1,12 +1,13 @@
 FROM centos:7
 
 # Initial system
-# bc libgomp perl tar tcsh wget vim-common           for FS
+# bc libgomp perl tcsh vim-common                    for FS
 #     mesa-libGL libXext libSM libXrender libXmu
 # java-1.8.0-openjdk                                 for MCR
 # mesa-libGLU mesa-dri-drivers                       for FS with xvfb
 RUN yum -y update && \
-    yum -y install bc libgomp perl tar tcsh wget vim-common && \
+    yum -y install wget tar zip unzip && \
+    yum -y install bc libgomp perl tcsh vim-common && \
     yum -y install mesa-libGL libXext libSM libXrender libXmu && \
     yum -y install java-1.8.0-openjdk && \
     yum -y install mesa-libGLU mesa-dri-drivers && \
