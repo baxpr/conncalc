@@ -9,3 +9,4 @@ freesurfer_license.txt
 .Rhistory
 *.asv
 external
+.DS_Store
