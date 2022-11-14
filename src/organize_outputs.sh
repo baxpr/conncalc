@@ -14,11 +14,11 @@ gzip T1/t1.nii
 if [[ "${connmaps_out}" == "yes" ]] ; then
 
     mkdir ZMAPS_KEEPGM
-    mv connmaps/Z_*_keepgm.nii ZMAPS_KEEPGM
+    mv connmaps/Z_*_keepgm.nii connmaps/sZ_*_keepgm.nii ZMAPS_KEEPGM
     gzip ZMAPS_KEEPGM/*.nii
 
     mkdir ZMAPS_REMOVEGM
-    mv connmaps/Z_*_removegm.nii ZMAPS_REMOVEGM
+    mv connmaps/Z_*_removegm.nii connmaps/sZ_*_removegm.nii ZMAPS_REMOVEGM
     gzip ZMAPS_REMOVEGM/*.nii
 
     mkdir MASK

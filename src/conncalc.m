@@ -38,7 +38,7 @@ addOptional(P,'t1_niigz','');
 addOptional(P,'mask_niigz','none');
 
 % Smoothing to apply to connectivity maps
-%addOptional(P,'fwhm','6');
+addOptional(P,'fwhm','8');
 
 % Output connectivity maps or no?
 addOptional(P,'connmaps_out','yes')

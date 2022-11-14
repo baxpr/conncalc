@@ -5,6 +5,7 @@
 # Initialize defaults for any input parameters where that seems useful
 export connmaps_out=no
 export mask_niigz=none
+export fwhm=8
 export label_info=
 export roidefinv_niigz=none
 export out_dir=/OUTPUTS
@@ -21,6 +22,7 @@ while [[ $# -gt 0 ]]; do
         --removegm_niigz)  export removegm_niigz="$2";  shift; shift ;;
         --keepgm_niigz)    export keepgm_niigz="$2";    shift; shift ;;
         --meanfmri_niigz)  export meanfmri_niigz="$2";  shift; shift ;;
+        --fwhm)            export fwhm="$2";            shift; shift ;;
         --connmaps_out)    export connmaps_out="$2";    shift; shift ;;
         --label_info)      export label_info="$2";      shift; shift ;;
         --out_dir)         export out_dir="$2";         shift; shift ;;
@@ -41,6 +43,7 @@ run_spm12.sh ${MATLAB_RUNTIME} function conncalc \
     roidefinv_niigz "${roidefinv_niigz}" \
     connmaps_out "${connmaps_out}" \
     label_info "${label_info}" \
+    fwhm "${fwhm}" \
     out_dir "${out_dir}"
 
 
