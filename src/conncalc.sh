@@ -8,6 +8,7 @@ export mask_niigz=none
 export fwhm=8
 export label_info=
 export roidefinv_niigz=none
+export roi_dir=/opt/conncalc/rois
 export out_dir=/OUTPUTS
 
 # Parse input options
@@ -25,6 +26,7 @@ while [[ $# -gt 0 ]]; do
         --fwhm)            export fwhm="$2";            shift; shift ;;
         --connmaps_out)    export connmaps_out="$2";    shift; shift ;;
         --label_info)      export label_info="$2";      shift; shift ;;
+        --roi_dir)         export roi_dir="$2";         shift; shift ;;
         --out_dir)         export out_dir="$2";         shift; shift ;;
         *) echo "Input ${1} not recognized"; shift ;;
     esac
@@ -44,6 +46,7 @@ run_spm12.sh ${MATLAB_RUNTIME} function conncalc \
     connmaps_out "${connmaps_out}" \
     label_info "${label_info}" \
     fwhm "${fwhm}" \
+    roi_dir "${roi_dir}" \
     out_dir "${out_dir}"
 
 

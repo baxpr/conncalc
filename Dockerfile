@@ -69,6 +69,7 @@ COPY ImageMagick-policy.xml /etc/ImageMagick-6/policy.xml
 COPY build /opt/conncalc/build
 COPY bin /opt/conncalc/bin
 COPY src /opt/conncalc/src
+COPY rois /opt/conncalc/rois
 COPY README.md /opt/conncalc
 
 # Add pipeline to system path
