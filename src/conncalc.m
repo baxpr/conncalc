@@ -20,6 +20,7 @@ P = inputParser;
 %       the roilabel_csv must also be provided with ROI labels.
 addOptional(P,'roi_niigz','Yeo2011_7Networks_MNI152_FreeSurferConformed1mm_LiberalMask-labels.nii.gz')
 addOptional(P,'roilabel_csv','')
+addOptional(P,'roi_dir','/opt/conncalc/rois')
 
 % Preprocessed fMRI, outputs from connprep. Same space as the ROI image.
 addOptional(P,'removegm_niigz','');
