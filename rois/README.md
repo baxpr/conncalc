@@ -46,7 +46,7 @@ This ROI was generated using the “aTPJ” map from the Mars et al. (2013) temp
 
 ## ASDR set
 
-In `src/rois/asdr`, `asdr.nii.gz` and `asdr-labels.csv`.
+`asdr.nii.gz` and `asdr-labels.csv`. `asdr2` set additionally includes left and right mid-cingulate spheres.
 
 Insular regions (posterior, mid, anterior) were generated using 16 cytoarchitecturally-defined ROIs (Farb 2013). The posterior, mid, and anterior ROIs included the 2 most posterior, 3 middle, and 3 most anterior regions per hemisphere, respectively. Overlapping voxels between middle and anterior, posterior regions were assigned to respective anterior and posterior regions.
 
