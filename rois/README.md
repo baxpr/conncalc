@@ -48,6 +48,8 @@ This ROI was generated using the “aTPJ” map from the Mars et al. (2013) temp
 
 `asdr.nii.gz` and `asdr-labels.csv`. `asdr2` set additionally includes left and right mid-cingulate spheres.
 
+Mid-cingulate spheres (left and right) are placed in the cingulate motor area at locations given in the supplementary data of Beckmann (20009).
+
 Insular regions (posterior, mid, anterior) were generated using 16 cytoarchitecturally-defined ROIs (Farb 2013). The posterior, mid, and anterior ROIs included the 2 most posterior, 3 middle, and 3 most anterior regions per hemisphere, respectively. Overlapping voxels between middle and anterior, posterior regions were assigned to respective anterior and posterior regions.
 
 Amygdala regions (centromedial, basolateral nuclei) were generated via the Juelich atlas in FSL (Amunts 2005), thresholding the corresponding maps at 50%. As the centomedial region is significantly smaller, voxels that met criteria for both regions were assigned to the centromedial ROI rather than basolateral.
@@ -75,6 +77,8 @@ Primary somatosensory regions were generated from mean MNI coordinates for body-
 References: 
 
 - Amunts, K., Kedo, O., Kindler, M., Pieperhoff, P., Mohlberg, H., Shah, N. J., ... & Zilles, K. (2005). Cytoarchitectonic mapping of the human amygdala, hippocampal region and entorhinal cortex: intersubject variability and probability maps. Anatomy and embryology, 210(5-6), 343-352.
+
+- Beckmann M, Johansen-Berg H, Rushworth MF. Connectivity-based parcellation of human cingulate cortex and its relation to functional specialization. J Neurosci. 2009 Jan 28;29(4):1175-90. doi: 10.1523/JNEUROSCI.3328-08.2009. PMID: 19176826; PMCID: PMC6665147.
 
 - Desikan R. S., Ségonne F., Fischl B., Quinn B. T., Dickerson B. C., Blacker D., Buckner R. L., Dale A. M., Maguire R. P., Hyman B. T., Albert M. S., Killiany R. J. An automated labeling system for subdividing the human cerebral cortex on MRI scans into gyral based regions of interest. (2006). Neuroimage, 3(3), 968-80.
 
