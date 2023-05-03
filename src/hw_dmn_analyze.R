@@ -14,9 +14,9 @@ dmnlist = c(
   'r0007_DMN_PAR_L',
   'r0008_DMN_PAR_R',
   'r0009_DMN_INFTEMP_L', 
-  'r0010_DMN_INFTEMP_R'
+  'r0010_DMN_INFTEMP_R',
+  'r0011_DMN_MDTHAL'
 )
-#  'r0011_DMN_MDTHAL'
 Cdmn = C[dmnlist,dmnlist]
 
 # Get just the unique values (upper triangle)
