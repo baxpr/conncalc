@@ -8,7 +8,8 @@
 
 radius = 6;
 
-rois = table(-41,+16,+54,{'DLPFC_L'},'VariableNames',{'x','y','z','Region'});
+rois = table([],[],[],{},'VariableNames',{'x','y','z','Region'});
+rois(end+1,:) = table(-41,+16,+54,{'DLPFC_L'});
 rois(end+1,:) = table(+41,+16,+54,{'DLPFC_R'});
 rois(end+1,:) = table(-34,+26,+02,{'ANTINS_L'});
 rois(end+1,:) = table(+34,+26,+02,{'ANTINS_R'});
@@ -18,6 +19,7 @@ rois(end+1,:) = table(-46,-66,+30,{'DMN_PAR_L'});
 rois(end+1,:) = table(+49,-63,+33,{'DMN_PAR_R'});
 rois(end+1,:) = table(-61,-24,-09,{'DMN_INFTEMP_L'});
 rois(end+1,:) = table(+58,-24,-09,{'DMN_INFTEMP_R'});
+rois(end+1,:) = table(+00,-12,+09,{'DMN_MDTHAL'});
 
 rois.Label = (1:height(rois))';
 
