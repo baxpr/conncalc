@@ -43,7 +43,15 @@ rois(end+1,:) = table(+41,+03,+06,{'SN_Ins_R'});
 rois(end+1,:) = table(-62,-45,+30,{'SN_LatPar_L'});
 rois(end+1,:) = table(+62,-45,+30,{'SN_LatPar_R'});
 
+rois(end+1,:) = table(-39,-26,+51,{'SS_MotCor_L'});
+rois(end+1,:) = table(+38,-26,+48,{'SS_MotCor_R'});
+rois(end+1,:) = table(+00,-21,+48,{'SS_SMA'});
 
+rois(end+1,:) = table(-07,-83,+02,{'VS_V1_L'});
+rois(end+1,:) = table(+07,-83,+02,{'VS_V1_R'});
+
+rois(end+1,:) = table(-62,-30,+12,{'AS_A1_L'});
+rois(end+1,:) = table(+59,-27,+15,{'AS_A1_R'});
 
 
 rois.Label = (1:height(rois))';
@@ -66,9 +74,10 @@ end
 Vroi = rmfield(V,'private');
 Vroi.pinfo(1:2) = [1 0];
 Vroi.dt(1) = spm_type('uint16');
-Vroi.fname = 'HW_DMN_1.nii';
+Vroi.fname = 'Raichle2011.nii';
 spm_write_vol(Vroi,Yroi);
-system('gzip -f HW_DMN_1.nii');
+system('gzip -f Raichle2011.nii');
 
 info = rois(:,{'Label','Region'});
-writetable(info,'HW_DMN_1-labels.csv')
+writetable(info,'Raichle2011-labels.csv')
+
