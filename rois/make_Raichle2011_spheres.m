@@ -78,6 +78,6 @@ Vroi.fname = 'Raichle2011.nii';
 spm_write_vol(Vroi,Yroi);
 system('gzip -f Raichle2011.nii');
 
-info = rois(:,{'Label','Region'});
+info = rois(:,{'Label','Region','x','y','z'});
 writetable(info,'Raichle2011-labels.csv')
 
