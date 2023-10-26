@@ -2,12 +2,11 @@
 
 ## Gordon2023_SCAN
 
-From the "Average" column in Table S1 of Gordon et al 2023 ([direct link](https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-023-05964-2/MediaObjects/41586_2023_5964_MOESM1_ESM.pdf))
-
+Motor cortex inter-effector and connected regions of interest from the "Average" column in Table S1 of Gordon et al 2023 ([direct link](https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-023-05964-2/MediaObjects/41586_2023_5964_MOESM1_ESM.pdf))
 
 Reference:
 
-- Gordon EM, Chauvin RJ, Van AN, Rajesh A, Nielsen A, Newbold DJ, Lynch CJ, Seider NA, Krimmel SR, Scheidter KM, Monk J, Miller RL, Metoki A, Montez DF, Zheng A, Elbau I, Madison T, Nishino T, Myers MJ, Kaplan S, Badke D'Andrea C, Demeter DV, Feigelis M, Ramirez JSB, Xu T, Barch DM, Smyser CD, Rogers CE, Zimmermann J, Botteron KN, Pruett JR, Willie JT, Brunner P, Shimony JS, Kay BP, Marek S, Norris SA, Gratton C, Sylvester CM, Power JD, Liston C, Greene DJ, Roland JL, Petersen SE, Raichle ME, Laumann TO, Fair DA, Dosenbach NUF. A somato-cognitive action network alternates with effector regions in motor cortex. Nature. 2023 May;617(7960):351-359. doi: 10.1038/s41586-023-05964-2. Epub 2023 Apr 19. PMID: 37076628; PMCID: PMC10172144.
+- Gordon EM, Chauvin RJ, Van AN, Rajesh A, Nielsen A, Newbold DJ, Lynch CJ, Seider NA, Krimmel SR, Scheidter KM, Monk J, Miller RL, Metoki A, Montez DF, Zheng A, Elbau I, Madison T, Nishino T, Myers MJ, Kaplan S, Badke D'Andrea C, Demeter DV, Feigelis M, Ramirez JSB, Xu T, Barch DM, Smyser CD, Rogers CE, Zimmermann J, Botteron KN, Pruett JR, Willie JT, Brunner P, Shimony JS, Kay BP, Marek S, Norris SA, Gratton C, Sylvester CM, Power JD, Liston C, Greene DJ, Roland JL, Petersen SE, Raichle ME, Laumann TO, Fair DA, Dosenbach NUF. A somato-cognitive action network alternates with effector regions in motor cortex. Nature. 2023 May;617(7960):351-359. doi: 10.1038/s41586-023-05964-2. Epub 2023 Apr 19. PMID: 37076628; PMCID: PMC10172144. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10172144/
 
 ## Yeo 2011
 
