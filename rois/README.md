@@ -8,7 +8,17 @@ Reference:
 
 - Gordon EM, Chauvin RJ, Van AN, Rajesh A, Nielsen A, Newbold DJ, Lynch CJ, Seider NA, Krimmel SR, Scheidter KM, Monk J, Miller RL, Metoki A, Montez DF, Zheng A, Elbau I, Madison T, Nishino T, Myers MJ, Kaplan S, Badke D'Andrea C, Demeter DV, Feigelis M, Ramirez JSB, Xu T, Barch DM, Smyser CD, Rogers CE, Zimmermann J, Botteron KN, Pruett JR, Willie JT, Brunner P, Shimony JS, Kay BP, Marek S, Norris SA, Gratton C, Sylvester CM, Power JD, Liston C, Greene DJ, Roland JL, Petersen SE, Raichle ME, Laumann TO, Fair DA, Dosenbach NUF. A somato-cognitive action network alternates with effector regions in motor cortex. Nature. 2023 May;617(7960):351-359. doi: 10.1038/s41586-023-05964-2. Epub 2023 Apr 19. PMID: 37076628; PMCID: PMC10172144. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10172144/
 
-## Yeo 2011
+
+## Raichle2011
+
+Seven-network, 36-ROI set from Figure 2 of Raichle 2011.
+
+Reference:
+
+- Raichle ME. The restless brain. Brain Connect. 2011;1(1):3-12. doi: 10.1089/brain.2011.0019. PMID: 22432951; PMCID: PMC3621343. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3621343/
+
+
+## Yeo2011
 
 Source for Yeo2011 ROIs (available in freesurfer 'average' subdirectory):
 https://www.freesurfer.net/fswiki/CorticalParcellation_Yeo2011
@@ -104,14 +114,15 @@ References:
 
 
  
-
 ## Amygdala HO50
 
 From the Harvard-Oxford atlas, https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Atlases
 
+
 ## BNST
 
 Avery SN, Clauss JA, Winder DG, Woodward N, Heckers S, Blackford JU. BNST neurocircuitry in humans. Neuroimage. 2014;91:311-323. doi:10.1016/j.neuroimage.2014.01.017
+
 
 ## Hippocampus_Ant HO
 
@@ -119,15 +130,18 @@ Anterior portion (Woolard 2012) of the Harvard-Oxford atlas hippocampus (https:/
 
 Woolard AA, Heckers S. Anatomical and functional correlates of human hippocampal volume asymmetry. Psychiatry Res. 2012;201(1):48-53. doi:10.1016/j.pscychresns.2011.07.016
 
+
 ## Hypothalamus
 
 Manual segmentation by J. Blackford
+
 
 ## Insula_anterior
 
 Combination of the 6 anterior sub-regions from
 
 Farb NA, Segal ZV, Anderson AK. Attentional modulation of primary interoceptive and exteroceptive cortices. Cereb Cortex. 2013;23(1):114-126. doi:10.1093/cercor/bhr385
+
 
 ## vmPFC
 
