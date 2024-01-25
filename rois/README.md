@@ -5,8 +5,19 @@
     uncertainty.nii.gz
     uncertainty-labels.csv
 
+Thalamic regions are from CAT12 (https://neuro-jena.github.io/cat/), Su et al 2019. Prefrontal regions are from Huang et al 2019.
+
+References:
+
+- Su, J. H., Thomas, F. T., Kasoff, W. S., Tourdias, T., Choi, E. Y., Rutt, B.K., & Saranathan, M. (2019). Thalamus Optimized Multi Atlas Segmentation (THOMAS): fast, fully automated segmentation of thalamic nuclei from structural MRI. Neuroimage, 194, 272-282. https://pubmed.ncbi.nlm.nih.gov/30894331/
+
+- Huang, A. S., Rogers, B. P., & Woodward, N. D. (2019). Disrupted modulation of thalamus activation and thalamocortical connectivity during dual task performance in schizophrenia. Schizophrenia research, 210, 270-277. https://pubmed.ncbi.nlm.nih.gov/30630706/
+
 
 ## Gordon2023_SCAN
+
+    Gordon2023_SCAN.nii.gz
+    Gordon2023_SCAN-labels.csv
 
 Motor cortex inter-effector and connected regions of interest from the "Average" column in Table S1 of Gordon et al 2023 ([direct link](https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-023-05964-2/MediaObjects/41586_2023_5964_MOESM1_ESM.pdf))
 
@@ -16,6 +27,9 @@ Reference:
 
 
 ## Raichle2011
+
+    Raichle2011.nii.gz
+    Raichle2011-labels.csv
 
 Seven-network, 36-ROI set from Figure 2 of Raichle 2011.
 
