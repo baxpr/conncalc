@@ -1,5 +1,11 @@
 # Sources for regions of interest
 
+## Uncertainty
+
+    uncertainty.nii.gz
+    uncertainty-labels.csv
+
+
 ## Gordon2023_SCAN
 
 Motor cortex inter-effector and connected regions of interest from the "Average" column in Table S1 of Gordon et al 2023 ([direct link](https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-023-05964-2/MediaObjects/41586_2023_5964_MOESM1_ESM.pdf))
