@@ -1,21 +1,17 @@
-function spm_make_standalone_local( ...
-	spmdir, ...
-	outdir, ...
-	extradir ...
-	)
-% Compile SPM as a standalone executable using the MATLAB compiler
-%   http://www.mathworks.com/products/compiler/
+function spm_make_standalone_local(spmdir,outdir,extradir)
+% Compile SPM as a standalone executable using the MATLAB Compiler
+%   https://www.mathworks.com/products/compiler.html
 %
 % This will generate a standalone application, which can be run outside
 % MATLAB, and therefore does not require a MATLAB licence.
 %
 % On Windows:
 %   spm12.exe <modality>
-%   spm12.exe run <batch.m(at)>
+%   spm12.exe batch <batch.m(at)>
 %
 % On Linux/Mac:
 %   ./run_spm12.sh <MCRroot> <modality>
-%   ./run_spm12.sh <MCRroot> run <batch.m(at)>
+%   ./run_spm12.sh <MCRroot> batch <batch.m(at)>
 %
 % The first command starts SPM in interactive mode with GUI. The second
 % executes a batch file or starts the Batch Editor if none is provided.
@@ -24,14 +20,23 @@ function spm_make_standalone_local( ...
 %   ./run_spm12.sh <MCRroot> --help
 %
 % When deployed, compiled applications will require the MATLAB Runtime:
-%   http://www.mathworks.com/products/compiler/mcr/
+%   https://www.mathworks.com/products/compiler/matlab-runtime.html
 % 
-% See spm_standalone.m
+% See spm_standalone.m and https://en.wikibooks.org/wiki/SPM/Standalone
 %__________________________________________________________________________
-% Copyright (C) 2010-2017 Wellcome Trust Centre for Neuroimaging
+% Copyright (C) 2010-2019 Wellcome Trust Centre for Neuroimaging
 
 % Guillaume Flandin
-% $Id: spm_make_standalone.m 7483 2018-11-12 13:19:31Z guillaume $
+% $Id: spm_make_standalone.m 7534 2019-02-20 17:09:45Z guillaume $
+
+
+% Updated to add an extra dir to the compile path. Also, we need SPM in the
+% path, and also need to trigger it's auto-add of config paths
+addpath(spmdir);
+spm_jobman('initcfg');
+if ~exist(outdir,'dir'), mkdir(outdir); end
+gateway = 'spm_standalone.m';
+contentsver = '';
 
 
 %-Check startup.m
@@ -40,18 +45,6 @@ if exist('startup','file')
     warning('A startup.m has been detected in %s.\n',...
         fileparts(which('startup')));
 end
-
-%-Input arguments
-%--------------------------------------------------------------------------
-
-% We need SPM in the path, and also need to trigger it's auto-add of config
-% paths
-addpath(spmdir);
-spm_jobman('initcfg');
-
-if ~exist(outdir,'dir'), mkdir(outdir); end
-gateway = 'spm_standalone.m';
-contentsver = '';
 
 
 %==========================================================================
@@ -103,24 +96,39 @@ if ~isempty(contentsver)
 end
 
 %==========================================================================
+%-Trim FieldTrip
+%==========================================================================
+d = fullfile(spm('Dir'),'external','fieldtrip','compat');
+d = cellstr(spm_select('FPList',d,'dir'));
+for i=1:numel(d)
+    f = spm_file(d{i},'basename');
+    nrmv = strncmp(f,'matlablt',8);
+    if nrmv
+        [dummy,I] = sort({f(9:end),version('-release')});
+        nrmv = I(1) == 2;
+    end
+    if ~nrmv
+        [sts, msg] = rmdir(d{i},'s');
+    end
+end
+
+%==========================================================================
 %-Compilation
 %==========================================================================
-%
-% Changes for custom version for this container:
-%    Add extradir with -a
-%    Add stats,images toolboxes with -p
 Ropts = {'-R','-singleCompThread'} ;
-if spm_check_version('matlab','8.4') >= 0
+if ~ismac && spm_check_version('matlab','8.4') >= 0
     Ropts = [Ropts, {'-R','-softwareopengl'}];
 end
+license('checkout','statistics_toolbox')
+license('checkout','signal_toolbox')
 mcc('-m', '-C', '-v',...
     '-o',lower(spm('Ver')),...
     '-d',outdir,...
     '-N',...
-	'-p',fullfile(matlabroot,'toolbox','stats'),...
-	'-p',fullfile(matlabroot,'toolbox','images'),...
-	'-p',fullfile(matlabroot,'toolbox','signal'),...
-	Ropts{:},...
-	'-a',spm('Dir'),...
-	'-a',extradir,...
+    '-p',fullfile(matlabroot,'toolbox','images'), ...
+    '-p',fullfile(matlabroot,'toolbox','signal'), ...
+    '-p',fullfile(matlabroot,'toolbox','stats'), ...
+    Ropts{:},...
+    '-a',spm('Dir'),...
+    '-a',extradir,...
     gateway);
