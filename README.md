@@ -8,8 +8,8 @@ Computes functional connectivity maps and matrices for a specified set of ROIs.
   [connprep](https://github.com/baxpr/connprep). This may be supplied in atlas space or 
   subject native space. The first two are 4D time series, the last a single 3D image.
 
-- `roi_niigz`.  ROI image. This may be an image existing within the container (e.g. the 
-  MNI space 'AABHHIP_LR.nii.gz', see src/rois/README.md). Or, it may be any supplied 
+- `roi_niigz`.  ROI image. This may be an image existing within the container (see 
+  `rois/README.md`). Or, it may be any supplied 
   image. In the latter case, `roilabel_csv` must also be supplied; this file must contain 
   Label and Region columns, or may be the STATS output of a slant assessor. The ROI
   image must be already be aligned with the T1 and the fMRI (though needn't be sampled to
