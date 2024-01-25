@@ -8,5 +8,5 @@ freesurfer_license.txt
 *.sif
 .Rhistory
 *.asv
-external/spm12
+external/spm12_r7771
 .DS_Store
