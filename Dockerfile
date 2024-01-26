@@ -25,7 +25,7 @@ RUN wget -nv https://ssd.mathworks.com/supportfiles/downloads/R2019b/Release/6/d
 
 # Matlab env
 ENV MATLAB_SHELL=/bin/bash
-ENV MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/v97
+ENV MATLAB_RUNTIME=/usr/local/MATLAB/MATLAB_Runtime/R2023a
 
 # Install Freesurfer (freeview only)
 RUN wget -nv https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.2.0/freesurfer-linux-centos7_x86_64-7.2.0.tar.gz \
