@@ -4,15 +4,15 @@ FROM containers.mathworks.com/matlab-runtime:r2023a
 # Modules
 #   General:      wget unzip zip
 #   Freesurfer:   bc ca-certificates curl libgomp1 libxmu6 libxt6 perl tcsh
-#   ImageMagick:  ghostscript imagemagick
+#   ImageMagick:  ghostscript imagemagick libfontconfig1 libfreetype6
 #   xvfb:         xvfb
 RUN apt-get update -qq \
     && apt-get install -y -q --no-install-recommends \
         wget unzip zip \
         bc ca-certificates curl libgomp1 libxmu6 libxt6 perl tcsh \
-        ghostscript imagemagick \
+        ghostscript imagemagick libfontconfig1 libfreetype6 \
         xvfb \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Matlab env
 ENV MATLAB_SHELL=/bin/bash
