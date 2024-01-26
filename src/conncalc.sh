@@ -67,5 +67,5 @@ else
         conncalc.pdf
 fi
 
-organize_outputs.sh
+#organize_outputs.sh   # FIXME bring this back
 

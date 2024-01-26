@@ -51,7 +51,7 @@ while IFS="," read -r roinum roiname; do
 	seedloc=$(cat seedloc.txt); seedloc=(${seedloc// / })
 	echo Seed image ${roinum} ${roiname} ${maskloc[@]} ${seedloc[@]}
 	connmap
-    break
+    break  # FIXME remove this
 done < rroi-labels.csv
 rm maskloc.txt seedloc.txt
 
