@@ -27,12 +27,13 @@ function connmap {
         -ras ${maskloc[0]} ${maskloc[1]} ${seedloc[2]} \
         -ss conn_${roiname}_axi.png
 
-	montage -mode concatenate -stroke white -fill white -title "${roiname}" \
+	montage -mode concatenate  \
         conn_${roiname}_sag.png conn_${roiname}_cor.png conn_${roiname}_axi.png \
         -tile 3x -quality 100 -background black -gravity center \
-        -border 10 -bordercolor black conn_${roiname}.png
-	  
-	rm conn_${roiname}_sag.png conn_${roiname}_cor.png conn_${roiname}_axi.png
+        -border 10 -bordercolor black -stroke white -fill white -title "${roiname}" \
+        conn_${roiname}.png
+
+#	rm conn_${roiname}_sag.png conn_${roiname}_cor.png conn_${roiname}_axi.png
 
 }
 
