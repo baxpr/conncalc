@@ -3,15 +3,9 @@ FROM containers.mathworks.com/matlab-runtime:r2023a
 
 # Modules
 #   General:      wget unzip zip
-#   Freesurfer:   bc ca-certificates curl libgomp1 libxmu6 libxt6 perl tcsh
-#   ImageMagick:  ghostscript imagemagick libfontconfig1 libfreetype6
-#   xvfb:         xvfb
 RUN apt-get update -qq \
     && apt-get install -y -q --no-install-recommends \
         wget unzip zip \
-        bc ca-certificates curl libgomp1 libxmu6 libxt6 perl tcsh \
-        ghostscript imagemagick libfontconfig1 libfreetype6 \
-        xvfb \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Matlab env
@@ -43,6 +37,18 @@ ENV SUBJECTS_DIR=/usr/local/freesurfer/subjects
 ENV LOCAL_DIR=/usr/local/freesurfer/local
 ENV FSF_OUTPUT_FORMAT=nii.gz
 ENV XDG_RUNTIME_DIR=/tmp
+
+# Modules
+#   Freesurfer:   bc ca-certificates curl libgomp1 libxmu6 libxt6 perl tcsh
+#   ImageMagick:  ghostscript imagemagick
+# ?? libfontconfig1 libfreetype6
+#   xvfb:         xvfb
+RUN apt-get update -qq \
+    && apt-get install -y -q --no-install-recommends \
+        bc ca-certificates curl libgomp1 libxmu6 libxt6 perl tcsh \
+        ghostscript imagemagick \
+        xvfb \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # We need to make the ImageMagick security policy more permissive 
 # to be able to write PDFs.
