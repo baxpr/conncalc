@@ -38,11 +38,11 @@ for sl in -040 -030 -020 -010 000 010 020 030 040 050 060; do
 done
 
 # Combine into single page
-montage -mode concatenate slice_fmri_-0{4,3,2,1}*.png slice_fmri_0*.png \
+montage -mode concatenate -font C059-Roman slice_fmri_-0{4,3,2,1}*.png slice_fmri_0*.png \
     -tile 3x4 -quality 100 -background black -gravity center \
     -border 20 -bordercolor black page_fmri.png
 
-convert \
+convert -font C059-Roman \
     -size 2250x3000 xc:white -density 300 \
     -gravity center \( page_fmri.png -resize 2000x \) -composite \
     -gravity North -pointsize 12 -annotate +0+100 \
@@ -51,11 +51,11 @@ convert \
     -gravity NorthWest -pointsize 12 -annotate +100+200 "${label_info}" \
     page_fmri.png
 
-montage -mode concatenate slice_t1_-0{4,3,2,1}*.png slice_t1_0*.png \
+montage -mode concatenate -font C059-Roman slice_t1_-0{4,3,2,1}*.png slice_t1_0*.png \
     -tile 3x4 -quality 100 -background black -gravity center \
     -border 20 -bordercolor black page_t1.png
 
-convert \
+convert -font C059-Roman \
     -size 2250x3000 xc:white -density 300 \
     -gravity center \( page_t1.png -resize 2000x \) -composite \
     -gravity North -pointsize 12 -annotate +0+100 \

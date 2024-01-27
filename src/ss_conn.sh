@@ -27,10 +27,12 @@ function connmap {
         -ras ${maskloc[0]} ${maskloc[1]} ${seedloc[2]} \
         -ss conn_${roiname}_axi.png
 
-	montage -mode concatenate -annotate +10+10 "${roiname}" -stroke white -fill white \
+	montage -mode concatenate -font C059-Roman \
         conn_${roiname}_sag.png conn_${roiname}_cor.png conn_${roiname}_axi.png \
         -tile 3x -quality 100 -background black -gravity center \
-        -border 10 -bordercolor black conn_${roiname}.png
+        -border 10 -bordercolor black \
+        -stroke white -fill white -pointsize 24 -gravity north \
+        -annotate +0+0 "${roiname}" conn_${roiname}.png
 	  
 	rm conn_${roiname}_sag.png conn_${roiname}_cor.png conn_${roiname}_axi.png
 
@@ -51,18 +53,17 @@ while IFS="," read -r roinum roiname; do
 	seedloc=$(cat seedloc.txt); seedloc=(${seedloc// / })
 	echo Seed image ${roinum} ${roiname} ${maskloc[@]} ${seedloc[@]}
 	connmap
-    break  # FIXME remove this
 done < rroi-labels.csv
 rm maskloc.txt seedloc.txt
 
 # Combine into single pages, in sets of 4
-montage -mode concatenate \
+montage -mode concatenate  -font C059-Roman \
 	conn_*.png \
 	-tile 1x4 -quality 100 -background white -gravity center \
 	-border 10 -bordercolor white shot_conn.png
 
 # Annotate
-convert -density 300 -gravity Center shot_conn*.png \
+convert -font C059-Roman -density 300 -gravity Center shot_conn*.png \
     -background white -resize 1850x -extent 2050x2800 -bordercolor white -border 100 \
     -gravity SouthEast -background white -splice 0x15 -pointsize 9 \
     -annotate +25+25 "$(date)" \
