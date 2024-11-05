@@ -5,8 +5,8 @@
 procyamlversion: 3.0.0-dev.0
 containers:
   - name: conncalc
-    path: conncalc_v1.9.0.sif
-    source: docker://baxterprogers/conncalc:v1.9.0
+    path: conncalc_v1.9.1.sif
+    source: docker://baxterprogers/conncalc:v1.9.1
 requirements:
   walltime: 2:00:00
   memory: 16G
