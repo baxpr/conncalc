@@ -1,0 +1,70 @@
+# Processor for conncalc with HW A/P hippocampus set
+---
+procyamlversion: 3.0.0-dev.0
+containers:
+  - name: conncalc
+    path: conncalc_v1.10.0.sif
+    source: docker://baxterprogers/conncalc:v1.10.0
+requirements:
+  walltime: 2:00:00
+  memory: 16G
+
+inputs:
+  xnat:
+    filters:
+      - type: match
+        inputs: assr_cat12,assr_connprep/assr_cat12
+      - type: match
+        inputs: scan_fmri,assr_connprep/scan_fmri
+      - type: match
+        inputs: scan_t1,assr_cat12/t1scan
+      - type: match
+        inputs: scan_t1,assr_connprep/scan_t1
+    scans:
+      - name: scan_t1
+        types: T1
+        keep_multis: 1
+      - name: scan_fmri
+        types: Funct_Run1,REST*,Rest*
+        nifti: fmri.nii.gz
+        skip_unusable: True
+    assessors:
+      - name: assr_connprep
+        proctypes: connprep_sgl_v2
+        resources:
+          - {resource: FILTERED_REMOVEGM_MNI, fdest: removegm.nii.gz}
+          - {resource: FILTERED_KEEPGM_MNI, fdest: keepgm.nii.gz}
+          - {resource: BRAIN_MASK_MNI, fdest: mask.nii.gz}
+          - {resource: MEAN_FMRI_MNI, fdest: meanfmri.nii.gz}
+      - name: assr_cat12
+        proctypes: cat12_ss2p0_v2
+        resources:
+          - {resource: BIAS_NORM, fdest: t1.nii.gz}
+          
+outputs:
+  - pdf: PDF/conncalc.pdf
+  - dir: DFMATRIX
+  - dir: RMATRIX
+  - dir: ROIDATA
+  - dir: ROILABELS
+  - dir: ROIS
+  - dir: ZMAPS_KEEPGM
+  - dir: ZMAPS_REMOVEGM
+  - dir: ZMATRIX
+
+command: 
+  type: singularity_run
+  container: conncalc
+  extraopts: -B /data/mcr/centos7/FS6/license.txt:/usr/local/freesurfer/.license
+  args: >-
+    --roi_niigz aphippo.nii.gz
+    --connmaps_out yes
+    --removegm_niigz /INPUTS/removegm.nii.gz
+    --keepgm_niigz /INPUTS/keepgm.nii.gz
+    --meanfmri_niigz /INPUTS/meanfmri.nii.gz
+    --mask_niigz /INPUTS/mask.nii.gz
+    --t1_niigz /INPUTS/t1.nii.gz
+    --fwhm 6
+    --out_dir /OUTPUTS
+
+jobtemplate: job_template_v3.txt
