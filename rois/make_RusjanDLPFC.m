@@ -11,13 +11,17 @@
 %
 % 8 mm sphere centered at MNI -50, +30, +36, with non-brain voxels masked
 % out.
+%
+% Additionally, a standard DMN ROI is added at the Raichle 2011 coordinate 
+%   DMN_PostCing  0, -52, 27
+% Because xcpd needs at least 2 seeds to run.
 
-radius = 8;
 
 tag = 'RusjanDLPFC';
 
-rois = table([],[],[],{},'VariableNames',{'x','y','z','Region'});
-rois(end+1,:) = table(-50,+30,+36,{'RusjanDLPFC_L'});
+rois = table([],[],[],[],{},'VariableNames',{'x','y','z','radius','Region'});
+rois(end+1,:) = table(-50,+30,+36,8,{'RusjanDLPFC_L'});
+rois(end+1,:) = table(0,-52,+27,6,{'Raichle_DMNpostCing'});
 
 
 rois.Label = (1:height(rois))';
@@ -35,7 +39,7 @@ for r = 1:height(rois)
         (XYZ(1,:)-rois.x(r)).^2 + ...
         (XYZ(2,:)-rois.y(r)).^2 + ...
         (XYZ(3,:)-rois.z(r)).^2;
-    keeps = dsq <= radius^2;
+    keeps = dsq <= rois.radius(r)^2;
     Yroi(keeps) = r;
     
 end
