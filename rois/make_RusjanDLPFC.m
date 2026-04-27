@@ -9,6 +9,8 @@
 %
 % https://pmc.ncbi.nlm.nih.gov/articles/PMC6871247/
 %
+% 8 mm sphere centered at MNI -50, +30, +36, with non-brain voxels masked
+% out.
 
 radius = 8;
 
