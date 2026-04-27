@@ -9,6 +9,7 @@ containers:
 requirements:
   walltime: '2:00:00'
   memory: 16G
+jobtemplate: job_template_v3.txt
 
 inputs:
   xnat:
@@ -19,12 +20,12 @@ inputs:
         inputs: scan_fmri,assr_connprep/scan_fmri
     scans:
       - name: scan_fmri
-        types: 'rsfMRI'
+        types: rest
         nifti: fmri.nii.gz
         skip_unusable: True
     assessors:
       - name: assr_connprep
-        proctypes: connprep_v2
+        proctypes: connprep_sgl_v2
         resources:
           - {resource: FILTERED_REMOVEGM_MNI, fdest: removegm.nii.gz}
           - {resource: FILTERED_KEEPGM_MNI, fdest: keepgm.nii.gz}
@@ -48,11 +49,17 @@ outputs:
   - dir: ZMATRIX
 
 command: 
-  type: singularity_run
+  type: singularity_exec
   container: conncalc
   extraopts: -B /data/mcr/centos7/FS6/license.txt:/usr/local/freesurfer/.license
   args: >-
-    --roi_niigz Raichle2011.nii.gz
+    bash -c '
+    cd /OUTPUTS &&
+    wget https://github.com/baxpr/conncalc/archive/refs/tags/v2.0.0.zip &&
+    unzip v2.0.0.zip &&
+    mv conncalc-2.0.0 conncalc &&
+    xwrapper.sh conncalc.sh 
+    --roi_niigz /OUTPUTS/conncalc/rois/RusjanDLPFC.nii.gz
     --connmaps_out yes
     --removegm_niigz /INPUTS/removegm.nii.gz
     --keepgm_niigz /INPUTS/keepgm.nii.gz
@@ -61,5 +68,4 @@ command:
     --t1_niigz /INPUTS/t1.nii.gz
     --fwhm 6
     --out_dir /OUTPUTS
-
-jobtemplate: job_template_v3.txt
+    '
