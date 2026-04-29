@@ -60,6 +60,7 @@ command:
     mv conncalc-2.0.0 conncalc &&
     xwrapper.sh conncalc.sh 
     --roi_niigz /OUTPUTS/conncalc/rois/RusjanDLPFC.nii.gz
+    --roilabel_csv /OUTPUTS/conncalc/rois/RusjanDLPFC-labels.csv
     --connmaps_out yes
     --removegm_niigz /INPUTS/removegm.nii.gz
     --keepgm_niigz /INPUTS/keepgm.nii.gz
